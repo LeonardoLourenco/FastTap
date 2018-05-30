@@ -30,6 +30,12 @@ public class DbFastTapOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        DbTableUsers dbTableUsers = new DbTableUsers(db);
+        dbTableUsers.create();
+
+        DbTableHighScores dbTableHighScores = new DbTableHighScores(db);
+        dbTableHighScores.create();
+
 
     }
 
