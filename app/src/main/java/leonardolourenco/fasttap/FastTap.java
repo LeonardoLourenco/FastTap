@@ -15,6 +15,7 @@ public class FastTap {
     private long currentTime = 0;                           //Used in Reaction Time
     private Random random = new Random();                   //Used in Reaction Mode
     private int lives = 3;
+    private int gStar = 0;                                  //Currency for Skins
 
 
 
@@ -36,7 +37,7 @@ public class FastTap {
 
     }
 
-    public void hit(int row, int col) {
+    public void hit(int row, int col) {         //this function is called when the users clicks a spot
         switch (Board[row][col]) {
             case BOMB:                // lose life and clean that spot, verify if player got a gameover
                 loseLife();
@@ -50,11 +51,26 @@ public class FastTap {
 
             case GENEMY:              // give 25 points and clean that spot
                 points += 25;
+                gStar ++;
                 cleanSpot(row, col);
                 break;
 
             case EMPTY:               // Maybe add a penalization for hitting nothing?
                 break;
+        }
+    }
+
+    private void spawn(int row, int col) {
+        if(Board[row][col] != BoardPiece.EMPTY) {
+            int RandomChance = random.nextInt(101 - 1) + 1;      //chance of something appearing       |0|__15%__|15|__35%__|50|__50%__|100|
+
+            if (RandomChance <= 15) {                                   //15% chance
+                Board[row][col] = BoardPiece.GENEMY;
+            } else if (RandomChance <= 50) {                            //35% chance
+                Board[row][col] = BoardPiece.BOMB;
+            } else if (RandomChance <= 100) {                           //50% chance
+                Board[row][col] = BoardPiece.ENEMY;
+            }
         }
     }
 
