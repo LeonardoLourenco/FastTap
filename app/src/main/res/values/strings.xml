@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FastTap</string>
     <string name="action_settings">Settings</string>
+    <string name="fast_tap">Fast Tap</string>
+    <string name="leaderboards">Leaderboards</string>
+    <string name="skins">Skins</string>
+    <string name="arcade">Arcade</string>
+    <string name="reaction_time">Reaction Time</string>
 </resources>
