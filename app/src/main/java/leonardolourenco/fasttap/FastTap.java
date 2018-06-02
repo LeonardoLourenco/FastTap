@@ -16,17 +16,21 @@ public class FastTap {
 
     private BoardPiece [][] Board = new BoardPiece[4][4];   //Area of Play will have a 4x4 Layout
     private int points = 0;                                 //Used in Arcade Mode
-    private long currentTime = 0;                           //Used in Reaction Time
+    private long currentSecs = 0;                           //Used in Reaction Time
+    private long currentMilli = 0;                           //Used in Reaction Time
     private Random random = new Random();                   //Used in Reaction Mode
     private int lives = 3;
     private int gStar = 0;                                  //Currency for Skins
 
+
     private Timer firstTimer = new Timer();
+    private Timer counterTimer = new Timer();
 
 
 
     public void newGame(){
         firstTimer = new Timer();
+        counterTimer = new Timer();
         lives = 3;
         points = 0;
         for (int r = 0; r < 4; r++) {
@@ -47,6 +51,13 @@ public class FastTap {
                 spawnReaction();
             }
         }, RandomSec * 1000); //delay - Time the timer takes to begin doing the task
+
+        counterTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                cronometer();
+            }
+        },RandomSec*1000,1);
 
     }
 
@@ -134,6 +145,14 @@ public class FastTap {
                 Board[rrow][rcol] = BoardPiece.GENEMY;
             }
 
+    }
+
+    private void cronometer(){  // 00 : 000  secs : milli
+        currentMilli++;
+        if(currentMilli == 1000){
+            currentMilli=0;
+            currentSecs++;
+        }
     }
 
     private void loseLife() {
