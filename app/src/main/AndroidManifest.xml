@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".playAreaActivity"
+            android:label="@string/title_activity_play_area"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

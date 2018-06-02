@@ -2,8 +2,27 @@
     <string name="app_name">FastTap</string>
     <string name="action_settings">Settings</string>
     <string name="fast_tap">Fast Tap</string>
+    <string name="button00">Button00</string>
+    <string name="button01">Button01</string>
+    <string name="button02">Button02</string>
+    <string name="button03">Button03</string>
+    <string name="button10">Button10</string>
+    <string name="button11">Button11</string>
+    <string name="button12">Button12</string>
+    <string name="button13">Button13</string>
+    <string name="button20">Button20</string>
+    <string name="button21">Button21</string>
+    <string name="button22">Button22</string>
+    <string name="button23">Button23</string>
+    <string name="button30">Button30</string>
+    <string name="button31">Button31</string>
+    <string name="button32">Button32</string>
+    <string name="button33">Button33</string>
+    <string name="score">Score :</string>
     <string name="leaderboards">Leaderboards</string>
     <string name="skins">Skins</string>
     <string name="arcade">Arcade</string>
     <string name="reaction_time">Reaction Time</string>
+    <string name="title_activity_play_area">playAreaActivity</string>
+    <string name="player_health">Player Health</string>
 </resources>
