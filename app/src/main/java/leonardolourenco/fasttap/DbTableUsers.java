@@ -20,7 +20,7 @@ public class DbTableUsers implements BaseColumns {
     public void create(){
         db.execSQL(
                 "CREATE TABLE " + TABLENAME + "(" +
-                        _ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         FIELD_USER_NAME + " TEXT NOT NULL" +
                         ")"
         );

@@ -17,6 +17,8 @@ public class DbTableHighScores implements BaseColumns {
 
     private SQLiteDatabase db;
 
+    public static final String [] ALL_COLUMNS = new String[] {_ID,FIELD_TYPE,FIELD_HIGH1,FIELD_HIGH2,FIELD_HIGH3,FIELD_HIGH4,FIELD_HIGH5,FIELD_ID_USER};
+
     public DbTableHighScores(SQLiteDatabase db) {
         this.db = db;
     }
@@ -24,7 +26,7 @@ public class DbTableHighScores implements BaseColumns {
     public void create(){
         db.execSQL(
                 "CREATE TABLE " + TABLENAME + "(" +
-                        _ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         FIELD_TYPE + " INTEGER NOT NULL," +
                         FIELD_HIGH1 + " TEXT," +
                         FIELD_HIGH2 + " TEXT," +
