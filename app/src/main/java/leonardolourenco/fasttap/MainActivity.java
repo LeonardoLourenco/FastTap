@@ -12,10 +12,17 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FastTap game;
+    private HighScores highScores;
+    private Users users;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Initialize all the classes here???
 
     }
 

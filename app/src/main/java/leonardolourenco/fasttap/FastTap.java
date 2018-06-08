@@ -1,13 +1,18 @@
 package leonardolourenco.fasttap;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.widget.Toast;
+
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class FastTap {
-    private enum BoardPiece{    //This is majorly related to the Arcade Mode
+    public enum BoardPiece{    //This is majorly related to the Arcade Mode
         BOMB,                   //Bomb - on touch -1 Life                         35% chance of appearing
         ENEMY,                  //Enemy - on touch 10 Points                      50% chance of appearing   Implementing an hard mode will the percentages changed
         GENEMY,                 //Gold Enemy - on touch 25 Points + 1 Gold Star   15% chance of appearing
@@ -15,13 +20,28 @@ public class FastTap {
     }
 
     private BoardPiece [][] Board = new BoardPiece[4][4];   //Area of Play will have a 4x4 Layout
+    private boolean gameOver = false;
     private int points = 0;                                 //Used in Arcade Mode
     private long currentSecs = 0;                           //Used in Reaction Time
     private long currentMilli = 0;                           //Used in Reaction Time
     private Random random = new Random();                   //Used in Reaction Mode
     private int lives = 3;
     private int gStar = 0;                                  //Currency for Skins
+    private int selectedSkin = 0;                           //Skin selected in the skinActivity
+    private Bitmap [] skin0 = {BitmapFactory.decodeFile("\\res\\drawable\\testenemy1.png"),
+                                BitmapFactory.decodeFile("\\res\\drawable\\testenemy2.png"),
+                                BitmapFactory.decodeFile("\\res\\drawable\\testenemy3.png"),
+                                BitmapFactory.decodeFile("\\res\\drawable\\testenemy4.png")};
 
+
+    public Bitmap[] getSelectedSkin() {
+        switch (selectedSkin) {
+            case 0:
+                return skin0;
+        }
+
+        return skin0;  //error situation
+    }
 
     private Timer firstTimer = new Timer();
     private Timer counterTimer = new Timer();
@@ -73,6 +93,11 @@ public class FastTap {
     }
 
     public void hitArcade(int row, int col) {         //this function is called when the users clicks a spot
+        if(gameOver){
+                //show toast with message
+            return;
+        }
+
         switch (Board[row][col]) {
             case BOMB:                // lose life and clean that spot, verify if player got a gameover
                 loseLife();
@@ -161,6 +186,26 @@ public class FastTap {
 
     private void cleanSpot(int row, int col) {  //cleans(Makes empty) the spot on the board
         Board[row][col] = BoardPiece.EMPTY;
+    }
+
+    public BoardPiece[][] getBoard() {
+        return Board.clone();
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public long getCurrentSecs() {
+        return currentSecs;
+    }
+
+    public long getCurrentMilli() {
+        return currentMilli;
+    }
+
+    public int getgStar() {
+        return gStar;
     }
 
 }
