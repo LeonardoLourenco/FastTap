@@ -8,12 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class playAreaActivity extends AppCompatActivity {
 
-    private FastTap game;
+    private FastTap game = new FastTap();
     private ImageButton[][] buttons = new ImageButton[4][4];
     private Bitmap[] currentSkin = game.getSelectedSkin();
+
 
 
     @Override
@@ -42,6 +44,25 @@ public class playAreaActivity extends AppCompatActivity {
         buttons[3][3] = (ImageButton) findViewById(R.id.imageButton33);
 
         game.newGame();
+        game.playReactionTime();
+
+    }
+
+
+    public void hit(View view){
+        if(game.getgameOver()){
+            Toast.makeText(this, "This game has ended", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        ImageButton b = (ImageButton) view;
+
+        String tag = b.getTag().toString();
+        int pos = Integer.parseInt(tag);
+
+        int row = pos / 10;
+        int col = pos % 10;
+
+        game.hitReaction(row,col);
 
     }
 
@@ -66,7 +87,7 @@ public class playAreaActivity extends AppCompatActivity {
                 }
             }
         }
-
+        // update points / timer here aswell
 
     }
 }

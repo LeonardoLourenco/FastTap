@@ -4,6 +4,7 @@ package leonardolourenco.fasttap;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -206,6 +207,10 @@ public class FastTap {
 
     public int getgStar() {
         return gStar;
+    }
+
+    public boolean getgameOver(){
+        return gameOver;
     }
 
 }
