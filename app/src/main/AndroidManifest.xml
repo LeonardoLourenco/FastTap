@@ -23,15 +23,6 @@
             android:name=".playAreaActivity"
             android:label="@string/title_activity_play_area"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".PlayingAreaActivity"
-            android:label="@string/title_activity_playing_area"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="leonardolourenco.fasttap.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
