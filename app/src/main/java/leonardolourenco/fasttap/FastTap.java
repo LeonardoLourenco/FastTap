@@ -154,9 +154,9 @@ public class FastTap {
         int rcol = random.nextInt(4);
             int RandomChance = random.nextInt(101 - 1) + 1;
 
-            if (RandomChance <= 60) {                                   //50% chance
+            if (RandomChance <= 70) {                                   //70% chance
                 Board[rrow][rcol] = BoardPiece.ENEMY;
-            } else if (RandomChance <= 100) {                           //50% chance
+            } else if (RandomChance <= 100) {                           //30% chance
                 Board[rrow][rcol] = BoardPiece.GENEMY;
             }
 

@@ -133,7 +133,7 @@ public class playAreaActivity extends AppCompatActivity {
         if(game.getgameOver()){
             timerUpdateDisplay.cancel();
             timerUpdateDisplay.purge();
-            Toast.makeText(this, "Nice. Your score is " + textViewScore.getText(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Nice. Your score is " + textViewScore.getText(), Toast.LENGTH_LONG).show(); //Maybe change this to Snackbar
         }
     }
 }
