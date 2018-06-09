@@ -114,6 +114,7 @@ public class playAreaActivity extends AppCompatActivity {
                         break;
                     case ENEMY:
                         buttons[row][col].setImageResource(currentSkin[1]);
+                        break;
                     case GENEMY:
                         buttons[row][col].setImageResource(currentSkin[2]);
                         break;

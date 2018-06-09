@@ -135,8 +135,8 @@ public class FastTap {
     }
 
     private void spawnArcade() {                               // Things should spawn every 2 secs, if an enemy is not defeated in 3 secs the users loses 1 life
-        int rrow = random.nextInt(5);
-        int rcol = random.nextInt(5);
+        int rrow = random.nextInt(4);
+        int rcol = random.nextInt(4);
         if(Board[rrow][rcol] != BoardPiece.EMPTY) {
             int RandomChance = random.nextInt(101 - 1) + 1;      //chance of something appearing       |0|__15%__|15|__35%__|50|__50%__|100|
 
@@ -151,14 +151,14 @@ public class FastTap {
     }
 
     private void spawnReaction() {                              //In reaction time the only things tha can appear are Enemies (60%) and Gold Enemies (40%)
-        int rrow = random.nextInt(5);
-        int rcol = random.nextInt(5);
+        int rrow = random.nextInt(4);
+        int rcol = random.nextInt(4);
             int RandomChance = random.nextInt(101 - 1) + 1;
 
             if (RandomChance <= 60) {                                   //50% chance
                 Board[rrow][rcol] = BoardPiece.ENEMY;
             } else if (RandomChance <= 100) {                           //50% chance
-                Board[rrow][rcol] = BoardPiece.GENEMY;
+                Board[rrow][rcol] = BoardPiece.BOMB;
             }
 
     }
