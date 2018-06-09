@@ -10,11 +10,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.util.Timer;
+
 public class playAreaActivity extends AppCompatActivity {
 
     private FastTap game = new FastTap();
     private ImageButton[][] buttons = new ImageButton[4][4];
     private Bitmap[] currentSkin = game.getSelectedSkin();
+    private Timer timerUpdateDisplay = new Timer();
 
 
 
@@ -87,6 +90,8 @@ public class playAreaActivity extends AppCompatActivity {
                 }
             }
         }
+
+
         // update points / timer here aswell
 
     }
