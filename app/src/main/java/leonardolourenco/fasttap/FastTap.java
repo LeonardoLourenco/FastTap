@@ -30,19 +30,20 @@ public class FastTap {
     private int lives = 3;
     private int gStar = 0;                                  //Currency for Skins
     private int selectedSkin = 0;                           //Skin selected in the skinActivity
-    private Bitmap [] skin0 = {BitmapFactory.decodeFile("\\res\\drawable\\testenemy1.png"),
-                                BitmapFactory.decodeFile("\\res\\drawable\\testenemy2.png"),
-                                BitmapFactory.decodeFile("\\res\\drawable\\testenemy3.png"),
-                                BitmapFactory.decodeFile("\\res\\drawable\\testenemy4.png")};
+    private Bitmap [] skin0 = {BitmapFactory.decodeFile("leonardolourenco.fasttap\\app\\src\\main\\res\\drawable\\testenemy1.png"),
+                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\testenemy2.png"),
+                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\testenemy3.png"),
+                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\testenemy4.png")};
 
-    private Bitmap [] hearts = {BitmapFactory.decodeFile("\\res\\drawable\\hearts1.png"),
-                                BitmapFactory.decodeFile("\\res\\drawable\\hearts2.png"),
-                                BitmapFactory.decodeFile("\\res\\drawable\\hearts3.png"),
-                                BitmapFactory.decodeFile("\\res\\drawable\\hearts4.png")};
+    private Bitmap [] hearts = {BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts1.png"),
+                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts2.png"),
+                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts3.png"),
+                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts4.png")};
 
 
     private Timer firstTimer = new Timer();
     private Timer counterTimer = new Timer();
+
 
 
 
