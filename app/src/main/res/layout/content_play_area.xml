@@ -91,7 +91,7 @@
             android:visibility="visible"
             app:layout_column="2"
             app:layout_row="0"
-            app:srcCompat="@drawable/testenemy4" />
+            app:srcCompat="@drawable/testenemy3" />
 
         <ImageButton
             android:id="@+id/imageButton03"

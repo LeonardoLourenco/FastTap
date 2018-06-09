@@ -8,23 +8,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class playAreaActivity extends AppCompatActivity {
 
     private FastTap game = new FastTap();
     private ImageButton[][] buttons = new ImageButton[4][4];
     private Bitmap[] currentSkin = game.getSelectedSkin();
-    private Timer timerUpdateDisplay = new Timer();
-
-
+    private Timer timerUpdateDisplay = new Timer();             //Timer used to update the display each 0,04 secs -> 40 milisecs
+    private TextView textViewScore;
+    private ImageView imageViewLife ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_area);
+
+        textViewScore = (TextView) findViewById(R.id.textViewScore);
+        imageViewLife = (ImageView) findViewById(R.id.imageViewLife);
 
         buttons[0][0] = (ImageButton) findViewById(R.id.imageButton00);
         buttons[0][1] = (ImageButton) findViewById(R.id.imageButton01);
@@ -48,6 +54,8 @@ public class playAreaActivity extends AppCompatActivity {
 
         game.newGame();
         game.playReactionTime();
+        updateDisplay();
+        displayUpdater();
 
     }
 
@@ -65,7 +73,32 @@ public class playAreaActivity extends AppCompatActivity {
         int row = pos / 10;
         int col = pos % 10;
 
+        //Put extra value will help solve this
+        //Put condition here for each mode
         game.hitReaction(row,col);
+
+        // game.hitArcade(row,col); For Arcade
+
+    }
+
+    private void displayUpdater(){
+
+        if(game.getgameOver()){
+            timerUpdateDisplay.cancel();
+        }
+
+        timerUpdateDisplay.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {          //Had to Implement this, the updateDisplay() needs to be run in the UI Thread
+                    @Override                           //       otherwise it will crash because he does not have access to the views
+                    public void run() {
+                        updateDisplay();
+                    }
+                });
+            }
+        }, game.getRandomSec(), 40);  //game.getRandomSec() is the delay used here because we dont want the timer to do
+                                             // unwanted work.
 
     }
 
@@ -91,8 +124,11 @@ public class playAreaActivity extends AppCompatActivity {
             }
         }
 
-
         // update points / timer here aswell
 
+        textViewScore.setText(game.getCurrentSecs() + ":" + game.getCurrentMilli());
+        /* For Arcade
+        textViewScore.setText("game.getPoints");
+        */
     }
 }

@@ -25,7 +25,8 @@ public class FastTap {
     private int points = 0;                                 //Used in Arcade Mode
     private long currentSecs = 0;                           //Used in Reaction Time
     private long currentMilli = 0;                           //Used in Reaction Time
-    private Random random = new Random();                   //Used in Reaction Mode
+    private Random random = new Random();
+    private int RandomSec;
     private int lives = 3;
     private int gStar = 0;                                  //Currency for Skins
     private int selectedSkin = 0;                           //Skin selected in the skinActivity
@@ -34,15 +35,11 @@ public class FastTap {
                                 BitmapFactory.decodeFile("\\res\\drawable\\testenemy3.png"),
                                 BitmapFactory.decodeFile("\\res\\drawable\\testenemy4.png")};
 
+    private Bitmap [] hearts = {BitmapFactory.decodeFile("\\res\\drawable\\hearts1.png"),
+                                BitmapFactory.decodeFile("\\res\\drawable\\hearts2.png"),
+                                BitmapFactory.decodeFile("\\res\\drawable\\hearts3.png"),
+                                BitmapFactory.decodeFile("\\res\\drawable\\hearts4.png")};
 
-    public Bitmap[] getSelectedSkin() {
-        switch (selectedSkin) {
-            case 0:
-                return skin0;
-        }
-
-        return skin0;  //error situation
-    }
 
     private Timer firstTimer = new Timer();
     private Timer counterTimer = new Timer();
@@ -64,7 +61,11 @@ public class FastTap {
 
 
     public void playReactionTime(){                    //After pressing Reaction Time on the Main Menu this method is called
-        int RandomSec = random.nextInt(6-1)+1; //Random secs, between 1 and 5 , that the enemy will take to appear on the screen.
+        RandomSec = random.nextInt(6-1)+1; //Random secs, between 1 and 5 , that the enemy will take to appear on the screen.
+        if(gameOver){
+            firstTimer.cancel();
+            counterTimer.cancel();
+        }
 
         firstTimer.schedule(new TimerTask() {                        //EXPERIMENTAL
             @Override
@@ -83,7 +84,7 @@ public class FastTap {
     }
 
     public void playArcade(){
-        int RandomSec = random.nextInt(4-1)+1; //Random secs, between 1 and 3 , that the enemy will take to appear on the screen.
+        RandomSec = random.nextInt(4-1)+1; //Random secs, between 1 and 3 , that the enemy will take to appear on the screen.
 
         firstTimer.schedule(new TimerTask() {                        //EXPERIMENTAL
             @Override
@@ -94,10 +95,6 @@ public class FastTap {
     }
 
     public void hitArcade(int row, int col) {         //this function is called when the users clicks a spot
-        if(gameOver){
-                //show toast with message
-            return;
-        }
 
         switch (Board[row][col]) {
             case BOMB:                // lose life and clean that spot, verify if player got a gameover
@@ -141,6 +138,9 @@ public class FastTap {
 
             case EMPTY:               // Maybe add a penalization for hitting nothing?
                 break;
+        }
+        if(lives == 0){
+            gameOver= true;
         }
     }
 
@@ -205,12 +205,25 @@ public class FastTap {
         return currentMilli;
     }
 
+    public int getRandomSec(){
+        return RandomSec;
+    }
+
     public int getgStar() {
         return gStar;
     }
 
     public boolean getgameOver(){
         return gameOver;
+    }
+
+    public Bitmap[] getSelectedSkin() {
+        switch (selectedSkin) {
+            case 0:
+                return skin0;
+        }
+
+        return skin0;  //error situation
     }
 
 }
