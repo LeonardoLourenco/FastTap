@@ -56,10 +56,6 @@ public class FastTap {
 
     public void playReactionTime(){                    //After pressing Reaction Time on the Main Menu this method is called
         RandomSec = random.nextInt(6-1)+1; //Random secs, between 1 and 5 , that the enemy will take to appear on the screen.
-        if(gameOver){
-            firstTimer.cancel();
-            counterTimer.cancel();
-        }
 
         firstTimer.schedule(new TimerTask() {                        //EXPERIMENTAL
             @Override
@@ -72,6 +68,9 @@ public class FastTap {
             @Override
             public void run() {
                 cronometer();
+                if(gameOver){
+                    stop();
+                }
             }
         },RandomSec*1000,1);
 
@@ -158,7 +157,7 @@ public class FastTap {
             if (RandomChance <= 60) {                                   //50% chance
                 Board[rrow][rcol] = BoardPiece.ENEMY;
             } else if (RandomChance <= 100) {                           //50% chance
-                Board[rrow][rcol] = BoardPiece.BOMB;
+                Board[rrow][rcol] = BoardPiece.GENEMY;
             }
 
     }
@@ -177,6 +176,13 @@ public class FastTap {
 
     private void cleanSpot(int row, int col) {  //cleans(Makes empty) the spot on the board
         Board[row][col] = BoardPiece.EMPTY;
+    }
+
+    public void stop(){
+        firstTimer.cancel();
+        firstTimer.purge();
+        counterTimer.cancel();
+        counterTimer.purge();
     }
 
     public BoardPiece[][] getBoard() {

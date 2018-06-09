@@ -83,9 +83,6 @@ public class playAreaActivity extends AppCompatActivity {
 
     private void displayUpdater(){
 
-        if(game.getgameOver()){
-            timerUpdateDisplay.cancel();
-        }
 
         timerUpdateDisplay.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -131,5 +128,10 @@ public class playAreaActivity extends AppCompatActivity {
         /* For Arcade
         textViewScore.setText("game.getPoints");
         */
+        if(game.getgameOver()){
+            timerUpdateDisplay.cancel();
+            timerUpdateDisplay.purge();
+            return;
+        }
     }
 }
