@@ -32,18 +32,18 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="0" />
+        tools:text="00:000" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
         android:text="@string/score"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBaseline_toBaselineOf="@+id/textViewScore"
-        app:layout_constraintEnd_toStartOf="@+id/textViewScore" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.v7.widget.GridLayout
         android:layout_width="wrap_content"

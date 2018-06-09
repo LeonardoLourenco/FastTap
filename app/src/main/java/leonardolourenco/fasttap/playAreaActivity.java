@@ -19,10 +19,10 @@ public class playAreaActivity extends AppCompatActivity {
 
     private FastTap game = new FastTap();
     private ImageButton[][] buttons = new ImageButton[4][4];
-    private Bitmap[] currentSkin = game.getSelectedSkin();
+    private int[] currentSkin = game.getSelectedSkin();
     private Timer timerUpdateDisplay = new Timer();             //Timer used to update the display each 0,04 secs -> 40 milisecs
     private TextView textViewScore;
-    private ImageView imageViewLife ;
+    private ImageView imageViewLife;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,15 +110,15 @@ public class playAreaActivity extends AppCompatActivity {
             for (int col = 0; col < 4; col++) {
                 switch (board[row][col]) {
                     case EMPTY:
-                        buttons[row][col].setImageBitmap(currentSkin[0]);
-                        break;
-                    case GENEMY:
-                        buttons[row][col].setImageBitmap(currentSkin[1]);
+                        buttons[row][col].setImageResource(currentSkin[0]);
                         break;
                     case ENEMY:
-                        buttons[row][col].setImageBitmap(currentSkin[2]);
+                        buttons[row][col].setImageResource(currentSkin[1]);
+                    case GENEMY:
+                        buttons[row][col].setImageResource(currentSkin[2]);
+                        break;
                     case BOMB:
-                        buttons[row][col].setImageBitmap(currentSkin[3]);
+                        buttons[row][col].setImageResource(currentSkin[3]);
                         break;
                 }
             }

@@ -30,20 +30,13 @@ public class FastTap {
     private int lives = 3;
     private int gStar = 0;                                  //Currency for Skins
     private int selectedSkin = 0;                           //Skin selected in the skinActivity
-    private Bitmap [] skin0 = {BitmapFactory.decodeFile("leonardolourenco.fasttap\\app\\src\\main\\res\\drawable\\testenemy1.png"),
-                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\testenemy2.png"),
-                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\testenemy3.png"),
-                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\testenemy4.png")};
+    private int [] skin0ids = {R.drawable.testenemy4,R.drawable.testenemy1,R.drawable.testenemy2,R.drawable.testenemy3};
 
-    private Bitmap [] hearts = {BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts1.png"),
-                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts2.png"),
-                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts3.png"),
-                                BitmapFactory.decodeFile("app\\src\\main\\res\\drawable\\hearts4.png")};
+    private int [] heartsid = {R.drawable.hearts1,R.drawable.hearts2,R.drawable.hearts3,R.drawable.hearts4};
 
 
     private Timer firstTimer = new Timer();
     private Timer counterTimer = new Timer();
-
 
 
 
@@ -117,22 +110,20 @@ public class FastTap {
             case EMPTY:               // Maybe add a penalization for hitting nothing?
                 break;
         }
+        if(lives == 0){
+            gameOver= true;
+        }
     }
 
     public void hitReaction(int row, int col) {         //this function is called when the users clicks a spot
         switch (Board[row][col]) {
-            case BOMB:                // lose life and clean that spot, verify if player got a gameover
-                loseLife();
-                cleanSpot(row, col);
-                break;
-
             case ENEMY:               // give 10 points and clean that spot
-                points += 10;
+                gameOver = true;
                 cleanSpot(row, col);
                 break;
 
             case GENEMY:              // give 25 points and clean that spot
-                points += 25;
+                gameOver = true;
                 gStar ++;
                 cleanSpot(row, col);
                 break;
@@ -140,9 +131,7 @@ public class FastTap {
             case EMPTY:               // Maybe add a penalization for hitting nothing?
                 break;
         }
-        if(lives == 0){
-            gameOver= true;
-        }
+
     }
 
     private void spawnArcade() {                               // Things should spawn every 2 secs, if an enemy is not defeated in 3 secs the users loses 1 life
@@ -218,13 +207,13 @@ public class FastTap {
         return gameOver;
     }
 
-    public Bitmap[] getSelectedSkin() {
+    public int[] getSelectedSkin() {
         switch (selectedSkin) {
             case 0:
-                return skin0;
+                return skin0ids;
         }
 
-        return skin0;  //error situation
+        return skin0ids;  //error situation
     }
 
 }
