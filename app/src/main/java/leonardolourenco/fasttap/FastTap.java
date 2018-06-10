@@ -127,7 +127,8 @@ public class FastTap {
                 cleanSpot(row, col);
                 break;
 
-            case EMPTY:               // Maybe add a penalization for hitting nothing?
+            case EMPTY:               // Penalization for hitting at random
+                currentSecs++;
                 break;
         }
 
