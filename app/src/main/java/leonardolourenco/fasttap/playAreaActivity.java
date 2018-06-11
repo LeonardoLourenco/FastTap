@@ -24,6 +24,7 @@ public class playAreaActivity extends AppCompatActivity {
     private Timer timerUpdateDisplay = new Timer();             //Timer used to update the display each 0,04 secs -> 40 milisecs
     private TextView textViewScore;
     private ImageView imageViewLife;
+    private int gameMode = 0;
     private ConstraintLayout constraintLayout;
 
     @Override
@@ -54,8 +55,17 @@ public class playAreaActivity extends AppCompatActivity {
         buttons[3][2] = (ImageButton) findViewById(R.id.imageButton32);
         buttons[3][3] = (ImageButton) findViewById(R.id.imageButton33);
 
+        //get gameMode int from extra on the button
+
         game.newGame();
-        game.playReactionTime();
+        if (gameMode == 1) {
+            game.playReactionTime();
+        }else if(gameMode == 2){
+            game.playArcade();
+        }else{
+            //error
+        }
+
         updateDisplay();
         displayUpdater();
 
@@ -75,11 +85,11 @@ public class playAreaActivity extends AppCompatActivity {
         int row = pos / 10;
         int col = pos % 10;
 
-        //Put extra value will help solve this
-        //Put condition here for each mode
-        game.hitReaction(row,col);
-
-        // game.hitArcade(row,col); For Arcade
+        if (gameMode == 1) {
+            game.hitReaction(row, col);
+        }else if(gameMode == 2){
+            game.hitArcade(row, col);
+        }
 
     }
 
@@ -124,16 +134,19 @@ public class playAreaActivity extends AppCompatActivity {
             }
         }
 
-        // update points / timer here aswell
+        if (gameMode == 1) {
+            textViewScore.setText(game.getCurrentSecs() + ":" + game.getCurrentMilli());
+        }else if(gameMode == 2){
+            textViewScore.setText(game.getPoints());
+        }
 
-        textViewScore.setText(game.getCurrentSecs() + ":" + game.getCurrentMilli());
-        /* For Arcade
-        textViewScore.setText("game.getPoints");
-        */
+        //Create a back button and do all the snackbars below it
         if(game.getgameOver()){
             timerUpdateDisplay.cancel();
             timerUpdateDisplay.purge();
             Toast.makeText(this, "Nice. Your score is " + textViewScore.getText(), Toast.LENGTH_LONG).show(); //Maybe change this to Snackbar
         }
+
+        //save string in the database
     }
 }
