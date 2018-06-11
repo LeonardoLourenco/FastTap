@@ -12,17 +12,18 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FastTap game;
     private HighScores highScores;
     private Users users;
+    private int gStar;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        gStar= getIntent().getIntExtra("gStar",0);
 
-        //Initialize all the classes here???
 
     }
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToPlayAreaArcade (View  view){
 
         Intent intent = new Intent(this,playAreaActivity.class);
-
+        intent.putExtra("gameMode",1);
         startActivity(intent);
 
     }
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToPlayAreaReaction (View  view){
 
         Intent intent = new Intent(this,playAreaActivity.class);
-
+        intent.putExtra("gameMode",1);
         startActivity(intent);
 
     }

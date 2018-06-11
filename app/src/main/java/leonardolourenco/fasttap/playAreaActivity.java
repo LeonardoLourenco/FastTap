@@ -1,5 +1,6 @@
 package leonardolourenco.fasttap;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -20,6 +21,7 @@ public class playAreaActivity extends AppCompatActivity {
 
     private FastTap game = new FastTap();
     private ImageButton[][] buttons = new ImageButton[4][4];
+    //probably will have a get extra here to know what skins was selected on Skins activity.
     private int[] currentSkin = game.getSelectedSkin();
     private Timer timerUpdateDisplay = new Timer();             //Timer used to update the display each 0,04 secs -> 40 milisecs
     private TextView textViewScore;
@@ -55,7 +57,8 @@ public class playAreaActivity extends AppCompatActivity {
         buttons[3][2] = (ImageButton) findViewById(R.id.imageButton32);
         buttons[3][3] = (ImageButton) findViewById(R.id.imageButton33);
 
-        //get gameMode int from extra on the button
+        gameMode = getIntent().getIntExtra("gameMode",0);
+        game.setgStar(getIntent().getIntExtra("gStar",0));
 
         game.newGame();
         if (gameMode == 1) {
@@ -138,9 +141,15 @@ public class playAreaActivity extends AppCompatActivity {
             textViewScore.setText(game.getCurrentSecs() + ":" + game.getCurrentMilli());
         }else if(gameMode == 2){
             textViewScore.setText(game.getPoints());
+            imageViewLife.setImageResource(game.getHearts());
         }
 
-        //Create a back button and do all the snackbars below it
+        //pass gStars from here to main and from main to skins and back.
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("gStar",game.getgStar());
+
+
+        //Make this appear on an alertdialog where the only option will be to go back to the main menu.
         if(game.getgameOver()){
             timerUpdateDisplay.cancel();
             timerUpdateDisplay.purge();

@@ -210,6 +210,10 @@ public class FastTap {
         return gStar;
     }
 
+    public void setgStar(int gStar) {
+        this.gStar = gStar;
+    }
+
     public boolean getgameOver(){
         return gameOver;
     }
@@ -221,6 +225,20 @@ public class FastTap {
         }
 
         return skin0ids;  //error situation
+    }
+
+    public int getHearts(){
+        switch(lives){
+            case 3:
+                return heartsid[0];
+            case 2:
+                return heartsid[1];
+            case 1:
+                return heartsid[2];
+            case 0:
+                return heartsid[3];
+        }
+        return heartsid[0];
     }
 
 }
