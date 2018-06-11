@@ -137,7 +137,7 @@ public class FastTap {
     private void spawnArcade() {                               // Things should spawn every 2 secs, if an enemy is not defeated in 3 secs the users loses 1 life
         int rrow = random.nextInt(4);
         int rcol = random.nextInt(4);
-        if(Board[rrow][rcol] != BoardPiece.EMPTY) {
+        if(Board[rrow][rcol] == BoardPiece.EMPTY) {
             int RandomChance = random.nextInt(101 - 1) + 1;      //chance of something appearing       |0|__15%__|15|__35%__|50|__50%__|100|
 
             if (RandomChance <= 15) {                                   //15% chance

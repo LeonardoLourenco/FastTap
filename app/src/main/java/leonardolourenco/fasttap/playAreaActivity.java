@@ -1,14 +1,17 @@
 package leonardolourenco.fasttap;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,10 +24,10 @@ public class playAreaActivity extends AppCompatActivity {
 
     private FastTap game = new FastTap();
     private ImageButton[][] buttons = new ImageButton[4][4];
-    //probably will have a get extra here to know what skins was selected on Skins activity.
     private int[] currentSkin = game.getSelectedSkin();
     private Timer timerUpdateDisplay = new Timer();             //Timer used to update the display each 0,04 secs -> 40 milisecs
     private TextView textViewScore;
+    private TextView textViewGStarCountPlay;
     private ImageView imageViewLife;
     private int gameMode = 0;
     private ConstraintLayout constraintLayout;
@@ -36,6 +39,7 @@ public class playAreaActivity extends AppCompatActivity {
 
         textViewScore = (TextView) findViewById(R.id.textViewScore);
         imageViewLife = (ImageView) findViewById(R.id.imageViewLife);
+        textViewGStarCountPlay = (TextView) findViewById(R.id.textViewGStarCountPlay);
 
         buttons[0][0] = (ImageButton) findViewById(R.id.imageButton00);
         buttons[0][1] = (ImageButton) findViewById(R.id.imageButton01);
@@ -65,8 +69,6 @@ public class playAreaActivity extends AppCompatActivity {
             game.playReactionTime();
         }else if(gameMode == 2){
             game.playArcade();
-        }else{
-            //error
         }
 
         updateDisplay();
@@ -140,20 +142,31 @@ public class playAreaActivity extends AppCompatActivity {
         if (gameMode == 1) {
             textViewScore.setText(game.getCurrentSecs() + ":" + game.getCurrentMilli());
         }else if(gameMode == 2){
-            textViewScore.setText(game.getPoints());
+            textViewScore.setText(game.getPoints()+"");
             imageViewLife.setImageResource(game.getHearts());
         }
+        textViewGStarCountPlay.setText(game.getgStar()+"");
 
         //pass gStars from here to main and from main to skins and back.
-        Intent intent = new Intent(this,MainActivity.class);
+        final Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("gStar",game.getgStar());
 
 
-        //Make this appear on an alertdialog where the only option will be to go back to the main menu.
+        //AlertDialog where the only option will be to go back to the main menu.
         if(game.getgameOver()){
             timerUpdateDisplay.cancel();
             timerUpdateDisplay.purge();
-            Toast.makeText(this, "Nice. Your score is " + textViewScore.getText(), Toast.LENGTH_LONG).show(); //Maybe change this to Snackbar
+            AlertDialog alertDialog = new AlertDialog.Builder(playAreaActivity.this).create();
+            alertDialog.setTitle("Nice!!");
+            alertDialog.setMessage("Your score is " + textViewScore.getText());
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
 
         //save string in the database
