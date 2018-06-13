@@ -48,6 +48,7 @@ public class FastTapTest {
 
         Users user = new Users();
         user.setUserName("Xico");
+        user.setGStar(10);
 
         //Insert/Create (C)RUD
         long id = TableUsers.insert(DbTableUsers.getContentValues(user));
@@ -55,10 +56,11 @@ public class FastTapTest {
         assertNotEquals("Failed to insert a user",-1,id);
 
         //Read/Query C(R)UD
-        user = ReadFirstUser(TableUsers,"Xico",id);
+        user = ReadFirstUser(TableUsers,"Xico", 10,id);
 
         //Update CR(U)D
         user.setUserName("Francisco");
+        user.setGStar(20);
         int rowsAffected = TableUsers.update(
                 DbTableUsers.getContentValues(user),
                 DbTableUsers._ID + "=?",
@@ -67,7 +69,7 @@ public class FastTapTest {
 
         assertEquals("Failed to update user", 1, rowsAffected);
 
-        user = ReadFirstUser(TableUsers,"Francisco",id);
+        user = ReadFirstUser(TableUsers,"Francisco", 20,id);
 
         //Delete CRU(D)
         rowsAffected = TableUsers.delete(
@@ -165,13 +167,14 @@ public class FastTapTest {
     }
 
     @NonNull
-    private Users ReadFirstUser(DbTableUsers TableUsers, String expectedusername, long expectedid) {
+    private Users ReadFirstUser(DbTableUsers TableUsers, String expectedusername, int expectedgstar, long expectedid) {
         Cursor cursor = TableUsers.query(DbTableUsers.ALL_COLUMNS, null, null, null, null, null);
         assertEquals("Failed to read categories",1, cursor.getCount());
 
         assertTrue("Failed to read the first category",cursor.moveToNext());
 
         Users user = DbTableUsers.getCurrentUserFromCursor(cursor);
+        assertEquals("Incorrect user gstar",expectedgstar,user.getGStar());
         assertEquals("Incorrect user name",expectedusername,user.getUserName());
         assertEquals("Incorrect user id",expectedid,user.getId());
         return user;

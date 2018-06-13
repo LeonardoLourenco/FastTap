@@ -12,7 +12,7 @@ public class DbTableUsers implements BaseColumns {
 
     private SQLiteDatabase db;
 
-    public static final String [] ALL_COLUMNS = new String[] {_ID,FIELD_USER_NAME};
+    public static final String [] ALL_COLUMNS = new String[] {_ID,FIELD_USER_NAME,FIELD_GSTAR};
 
     public DbTableUsers(SQLiteDatabase db){
         this.db= db;
