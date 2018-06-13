@@ -8,6 +8,7 @@ import android.provider.BaseColumns;
 public class DbTableUsers implements BaseColumns {
     public static final String TABLENAME = "Users";
     public static final String FIELD_USER_NAME = "UserName";
+    public static final String FIELD_GSTAR = "GStar";
 
     private SQLiteDatabase db;
 
@@ -21,7 +22,8 @@ public class DbTableUsers implements BaseColumns {
         db.execSQL(
                 "CREATE TABLE " + TABLENAME + "(" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        FIELD_USER_NAME + " TEXT NOT NULL" +
+                        FIELD_USER_NAME + " TEXT NOT NULL," +
+                        FIELD_GSTAR + " INTEGER " +
                         ")"
         );
 
@@ -32,6 +34,7 @@ public class DbTableUsers implements BaseColumns {
 
         values.put(_ID,users.getId());
         values.put(FIELD_USER_NAME,users.getUserName());
+        values.put(FIELD_GSTAR,users.getGStar());
 
         return values;
     }
@@ -39,11 +42,13 @@ public class DbTableUsers implements BaseColumns {
     public static Users getCurrentUserFromCursor(Cursor cursor){
         final int posId = cursor.getColumnIndex(_ID);
         final int posUserName = cursor.getColumnIndex(FIELD_USER_NAME);
+        final int posGStar = cursor.getColumnIndex(FIELD_GSTAR);
 
         Users user = new Users();
 
         user.setId(cursor.getInt(posId));
         user.setUserName(cursor.getString(posUserName));
+        user.setGStar(cursor.getInt(posGStar));
 
 
         return user;

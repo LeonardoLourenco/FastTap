@@ -3,6 +3,7 @@ package leonardolourenco.fasttap;
 public class Users {
     private int id;
     private String UserName;
+    private int GStar;
 
     public int getId() {
         return id;
@@ -18,5 +19,13 @@ public class Users {
 
     public void setUserName(String userName) {
         UserName = userName;
+    }
+
+    public int getGStar() {
+        return GStar;
+    }
+
+    public void setGStar(int GStar) {
+        this.GStar = GStar;
     }
 }
