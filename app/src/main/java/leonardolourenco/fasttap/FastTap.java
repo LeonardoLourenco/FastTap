@@ -33,6 +33,8 @@ public class FastTap {
     private int [] skin0ids = {R.drawable.testenemy4,R.drawable.testenemy1,R.drawable.testenemy2,R.drawable.testenemy3};
 
     private int [] heartsid = {R.drawable.hearts1,R.drawable.hearts2,R.drawable.hearts3,R.drawable.hearts4};
+    private long [][] enemyTimeMilli = new long[4][4];
+    private long [][] enemyTimeSecs = new long[4][4];
 
 
     private Timer firstTimer = new Timer();
@@ -84,7 +86,18 @@ public class FastTap {
             public void run() {
                 spawnArcade();
             }
-        }, RandomSec * 1000,2000); //delay - Time the timer takes to begin doing the task
+        }, RandomSec * 1000,500); //delay - Time the timer takes to begin doing the task
+
+        counterTimer.scheduleAtFixedRate(new TimerTask() { //do this verification every second, if the enemy is on the board for 3 secs, clean spot and user lose a life.
+            @Override
+            public void run() {
+                cronometerArcade();
+                checkEnemytime();
+                if(gameOver){
+                    stop();
+                }
+            }
+        },RandomSec * 1000,500);
     }
 
     public void hitArcade(int row, int col) {         //this function is called when the users clicks a spot
@@ -147,6 +160,8 @@ public class FastTap {
             } else if (RandomChance <= 100) {                           //50% chance
                 Board[rrow][rcol] = BoardPiece.ENEMY;
             }
+            enemyTimeSecs[rrow][rcol]= currentSecs+3;
+            enemyTimeMilli[rrow][rcol]= currentMilli;
         }
     }
 
@@ -168,6 +183,43 @@ public class FastTap {
         if(currentMilli == 1000){
             currentMilli=0;
             currentSecs++;
+        }
+    }
+
+    private void cronometerArcade(){  // 00 : 000  secs : milli
+        currentMilli+=500;
+        if(currentMilli == 1000){
+            currentMilli=0;
+            currentSecs++;
+        }
+    }
+
+    private void checkEnemytime(){ //check every sec
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                switch (Board[row][col]){
+                    case BOMB:
+                        if(currentSecs == enemyTimeSecs[row][col]&& currentMilli == enemyTimeMilli[row][col]) {
+                            cleanSpot(row, col);
+                            break;
+                        }
+                    case ENEMY:
+                        if(currentSecs == enemyTimeSecs[row][col]&& currentMilli == enemyTimeMilli[row][col]) {
+                            cleanSpot(row, col);
+                            loseLife();
+                            break;
+                        }
+                    case GENEMY:
+                        if(currentSecs == enemyTimeSecs[row][col]&& currentMilli == enemyTimeMilli[row][col]) {
+                            cleanSpot(row, col);
+                            loseLife();
+                            break;
+                        }
+                        if(lives == 0){
+                            gameOver= true;
+                        }
+                }
+            }
         }
     }
 
