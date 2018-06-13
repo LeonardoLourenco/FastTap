@@ -1,12 +1,6 @@
 package leonardolourenco.fasttap;
 
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,6 +16,7 @@ public class FastTap {
 
     private BoardPiece [][] Board = new BoardPiece[4][4];   //Area of Play will have a 4x4 Layout
     private boolean gameOver = false;
+    private boolean hardlevel = false;
     private int points = 0;                                 //Used in Arcade Mode
     private long currentSecs = 0;                           //Used in Reaction Time
     private long currentMilli = 0;                           //Used in Reaction Time
@@ -35,8 +30,10 @@ public class FastTap {
     private int [] heartsid = {R.drawable.hearts1,R.drawable.hearts2,R.drawable.hearts3,R.drawable.hearts4};
     private long [][] enemyTimeMilli = new long[4][4];
     private long [][] enemyTimeSecs = new long[4][4];
-
-
+    private int spawnInterval = 1000;           //0pt -> 1000ms | 100pt -> 500ms | 250pt -> 250ms  //time it takes for things to spawn
+    private int lifeTime = 50;                  //0pt -> 6secs | 100pt -> 3secs | 250pt -> 1,5secs //time it takes for things to despawn
+                                                //Using one more decimal to avoid using double which by themselves cannot be added to longs.
+                                                //Im using these two variables to make arcade mode more interesting.
     private Timer firstTimer = new Timer();
     private Timer counterTimer = new Timer();
 
@@ -59,7 +56,7 @@ public class FastTap {
     public void playReactionTime(){                    //After pressing Reaction Time on the Main Menu this method is called
         RandomSec = random.nextInt(6-1)+1; //Random secs, between 1 and 5 , that the enemy will take to appear on the screen.
 
-        firstTimer.schedule(new TimerTask() {                        //EXPERIMENTAL
+        firstTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 spawnReaction();
@@ -81,14 +78,14 @@ public class FastTap {
     public void playArcade(){
         RandomSec = random.nextInt(4-1)+1; //Random secs, between 1 and 3 , that the enemy will take to appear on the screen.
 
-        firstTimer.schedule(new TimerTask() {                        //EXPERIMENTAL
+        firstTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 spawnArcade();
             }
-        }, RandomSec * 1000,500); //delay - Time the timer takes to begin doing the task
+        }, RandomSec * 1000, spawnInterval); //delay - Time the timer takes to begin doing the task
 
-        counterTimer.scheduleAtFixedRate(new TimerTask() { //do this verification every second, if the enemy is on the board for 3 secs, clean spot and user lose a life.
+        counterTimer.scheduleAtFixedRate(new TimerTask() { //do this verification every spawnInterval, if the enemy is on the board for lifeTime secs, clean spot and user lose a life.
             @Override
             public void run() {
                 cronometerArcade();
@@ -96,8 +93,44 @@ public class FastTap {
                 if(gameOver){
                     stop();
                 }
+                if(points >= 100){
+                        spawnInterval = 500;
+                        lifeTime = 30;
+                        stop();
+                        reScheduleArcade();
+                }
             }
-        },RandomSec * 1000,500);
+        },RandomSec * 1000, spawnInterval);
+
+    }
+
+    public void reScheduleArcade(){
+        firstTimer = new Timer();
+        counterTimer = new Timer();
+        firstTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                spawnArcade();
+            }
+        }, 0, spawnInterval);
+
+        counterTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                cronometerArcade();
+                checkEnemytime();
+                if(gameOver){
+                    stop();
+                }
+                if(points >= 350 && !hardlevel){
+                        hardlevel=true;
+                        spawnInterval = 250;
+                        lifeTime = 15;
+                        stop();
+                        reScheduleArcade();
+                }
+            }
+        },0, spawnInterval);
     }
 
     public void hitArcade(int row, int col) {         //this function is called when the users clicks a spot
@@ -122,6 +155,7 @@ public class FastTap {
             case EMPTY:               // Maybe add a penalization for hitting nothing?
                 break;
         }
+
         if(lives == 0){
             gameOver= true;
         }
@@ -153,15 +187,18 @@ public class FastTap {
         if(Board[rrow][rcol] == BoardPiece.EMPTY) {
             int RandomChance = random.nextInt(101 - 1) + 1;      //chance of something appearing       |0|__15%__|15|__35%__|50|__50%__|100|
 
+            enemyTimeSecs[rrow][rcol]= currentSecs+lifeTime/10;
+            enemyTimeMilli[rrow][rcol]= currentMilli+lifeTime%10*100;
+
             if (RandomChance <= 15) {                                   //15% chance
                 Board[rrow][rcol] = BoardPiece.GENEMY;
             } else if (RandomChance <= 50) {                            //35% chance
                 Board[rrow][rcol] = BoardPiece.BOMB;
+                enemyTimeSecs[rrow][rcol]= currentSecs+6;
+                enemyTimeMilli[rrow][rcol]= currentMilli;
             } else if (RandomChance <= 100) {                           //50% chance
                 Board[rrow][rcol] = BoardPiece.ENEMY;
             }
-            enemyTimeSecs[rrow][rcol]= currentSecs+3;
-            enemyTimeMilli[rrow][rcol]= currentMilli;
         }
     }
 
@@ -187,7 +224,7 @@ public class FastTap {
     }
 
     private void cronometerArcade(){  // 00 : 000  secs : milli
-        currentMilli+=500;
+        currentMilli+= spawnInterval;
         if(currentMilli == 1000){
             currentMilli=0;
             currentSecs++;
@@ -231,7 +268,7 @@ public class FastTap {
         Board[row][col] = BoardPiece.EMPTY;
     }
 
-    public void stop(){
+    public void stop(){     //cleans the timers schedules
         firstTimer.cancel();
         firstTimer.purge();
         counterTimer.cancel();
