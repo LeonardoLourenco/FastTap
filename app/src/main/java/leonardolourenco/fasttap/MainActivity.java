@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Cursor cursor;
     private Users user = new Users();
     private TextView textViewGStarCountMain;
+    private TextView textViewUserName;
 
 
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textViewGStarCountMain = (TextView) findViewById(R.id.textViewGStarCountMain);
+        textViewUserName = (TextView) findViewById(R.id.textViewUserName);
 
         //Open DB
         DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                 new String[] { Long.toString(id) });
                         cursor = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
                         cursor.moveToFirst();
+                        textViewUserName.setText(user.getUserName()+"");
                         wantToCloseDialog = true;
                     }
                     if(wantToCloseDialog)
@@ -104,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textViewGStarCountMain.setText(user.getGStar()+"");
-        //create texView that displays user name .setText(user.getUserName()+"");
+        textViewUserName.setText(user.getUserName()+"");
     }
 
     @Override
