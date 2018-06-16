@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                 new String[] { Long.toString(id) });
                         cursor = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
                         cursor.moveToFirst();
+                        user = tableUsers.getCurrentUserFromCursor(cursor);
                         textViewUserName.setText(user.getUserName()+"");
                         wantToCloseDialog = true;
                     }
@@ -132,18 +133,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goToPlayAreaArcade (View  view){
-
-        Intent intent = new Intent(this,playAreaActivity.class);
-        intent.putExtra("gameMode",2);
-        startActivity(intent);
-
-    }
-
     public void goToPlayAreaReaction (View  view){
 
         Intent intent = new Intent(this,playAreaActivity.class);
         intent.putExtra("gameMode",1);
+        startActivity(intent);
+
+    }
+
+    public void goToPlayAreaArcade (View  view){
+
+        Intent intent = new Intent(this,playAreaActivity.class);
+        intent.putExtra("gameMode",2);
         startActivity(intent);
 
     }

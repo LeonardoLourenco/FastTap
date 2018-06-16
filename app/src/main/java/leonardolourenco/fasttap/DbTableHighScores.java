@@ -44,7 +44,6 @@ public class DbTableHighScores implements BaseColumns {
     public static ContentValues getContentValues (HighScores highScores){
         ContentValues values = new ContentValues();
 
-        values.put(_ID,highScores.getId());
         values.put(FIELD_TYPE,highScores.getType());
         values.put(FIELD_HIGH1,highScores.getHigh1());
         values.put(FIELD_HIGH2,highScores.getHigh2());

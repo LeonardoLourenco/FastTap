@@ -2,6 +2,8 @@ package leonardolourenco.fasttap;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -23,6 +25,8 @@ import java.util.TimerTask;
 public class playAreaActivity extends AppCompatActivity {
 
     private FastTap game = new FastTap();
+    private Users user = new Users();
+    private HighScores highScores = new HighScores();
     private ImageButton[][] buttons = new ImageButton[4][4];
     private int[] currentSkin = game.getSelectedSkin();
     private Timer timerUpdateDisplay = new Timer();             //Timer used to update the display each 0,04 secs -> 40 milisecs
@@ -31,11 +35,20 @@ public class playAreaActivity extends AppCompatActivity {
     private ImageView imageViewLife;
     private int gameMode = 0;
     private ConstraintLayout constraintLayout;
+    private String[] sorted = new String[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_area);
+
+        //Open DB
+        DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
+        //Read from the database
+        SQLiteDatabase db = dbFastTapOpenHelper.getWritableDatabase();
+
+        final DbTableUsers tableUsers = new DbTableUsers(db);
+        final DbTableHighScores tableHighScores = new DbTableHighScores(db);
 
         textViewScore = (TextView) findViewById(R.id.textViewScore);
         imageViewLife = (ImageView) findViewById(R.id.imageViewLife);
@@ -62,7 +75,48 @@ public class playAreaActivity extends AppCompatActivity {
         buttons[3][3] = (ImageButton) findViewById(R.id.imageButton33);
 
         gameMode = getIntent().getIntExtra("gameMode",0);
-        game.setgStar(getIntent().getIntExtra("gStar",0));
+        Cursor cursorUser = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
+        cursorUser.moveToFirst();
+        user = tableUsers.getCurrentUserFromCursor(cursorUser);
+        //get row where user._id equal user_ID and type equals gamemode
+
+        Cursor cursorHighScore = tableHighScores.query(null,DbTableHighScores.FIELD_ID_USER + "=? AND " + DbTableHighScores.FIELD_TYPE + "=?",
+                new String[] { Long.toString(user.getId()) , Integer.toString(gameMode) },null,null,null);
+        if(cursorHighScore.getCount() > 0){    //Search if the rows have been created, if yes get the row where type = gamemode and user id equals user id
+            cursorHighScore.moveToFirst();
+            highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
+        }else {
+            //else create the row for game mode Arcade and Reaction | type 1 and 2
+            if(gameMode ==1){
+                highScores.setType(1);
+                highScores.setHigh1("99:999");
+                highScores.setHigh2("99:999");
+                highScores.setHigh3("99:999");
+                highScores.setHigh4("99:999");
+                highScores.setHigh5("99:999");
+                highScores.setIdUser(user.getId());
+                tableHighScores.insert(DbTableHighScores.getContentValues(highScores));
+            }else if(gameMode == 2) {
+                highScores.setType(2);
+                highScores.setHigh1("0");
+                highScores.setHigh2("0");
+                highScores.setHigh3("0");
+                highScores.setHigh4("0");
+                highScores.setHigh5("0");
+                highScores.setIdUser(user.getId());
+                tableHighScores.insert(DbTableHighScores.getContentValues(highScores));
+            }
+
+            cursorHighScore = tableHighScores.query(null,DbTableHighScores.FIELD_ID_USER + "=? AND " + DbTableHighScores.FIELD_TYPE + "=?",
+                    new String[] { Long.toString(user.getId()) , Integer.toString(gameMode) },null,null,null);
+            cursorHighScore.moveToFirst();
+            highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
+            user.getGStar();
+        }
+
+        placeScoresOnSorted();
+
+        game.setGStar(user.getGStar());
 
         game.newGame();
         if (gameMode == 1) {
@@ -73,9 +127,10 @@ public class playAreaActivity extends AppCompatActivity {
 
         updateDisplay();
         displayUpdater();
-
+        db.close();
+        cursorHighScore.close();
+        cursorUser.close();
     }
-
 
     public void hit(View view){
         if(game.getgameOver()){
@@ -145,17 +200,19 @@ public class playAreaActivity extends AppCompatActivity {
             textViewScore.setText(game.getPoints()+"");
             imageViewLife.setImageResource(game.getHearts());
         }
-        textViewGStarCountPlay.setText(game.getgStar()+"");
+        textViewGStarCountPlay.setText(game.getGStar()+"");
 
-        //pass gStars from here to main and from main to skins and back.
         final Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("gStar",game.getgStar());
 
 
         //AlertDialog where the only option will be to go back to the main menu.
         if(game.getgameOver()){
             timerUpdateDisplay.cancel();
             timerUpdateDisplay.purge();
+            sorted[5] = ""+textViewScore.getText(); //place the new score in sorted sow e can sort the scores.
+            bubbleSort();
+            takeScoresOffSorted();
+            updateHighScoreAndUser();
             AlertDialog alertDialog = new AlertDialog.Builder(playAreaActivity.this).create();
             alertDialog.setTitle("Nice!!");
             alertDialog.setMessage("Your score is " + textViewScore.getText());
@@ -168,7 +225,68 @@ public class playAreaActivity extends AppCompatActivity {
                     });
             alertDialog.show();
         }
-
-        //save string in the database
     }
+
+    private void updateHighScoreAndUser(){
+
+        //Open DB
+        DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
+        //Read from the database
+        SQLiteDatabase db = dbFastTapOpenHelper.getWritableDatabase();
+
+        final DbTableUsers tableUsers = new DbTableUsers(db);
+        final DbTableHighScores tableHighScores = new DbTableHighScores(db);
+
+        user.setGStar(game.getGStar());
+        tableHighScores.update(DbTableHighScores.getContentValues(highScores),DbTableHighScores.FIELD_ID_USER + "=? AND " + DbTableHighScores.FIELD_TYPE + "=?",
+                new String[] { Long.toString(user.getId()) , Integer.toString(highScores.getType()) });
+
+        tableUsers.update(DbTableUsers.getContentValues(user),DbTableUsers._ID + "=?",
+                new String[] { Long.toString(user.getId()) });
+        db.close();
+    }
+
+    private void placeScoresOnSorted() {
+            sorted[0] = highScores.getHigh1();
+            sorted[1] = highScores.getHigh2();
+            sorted[2] = highScores.getHigh3();
+            sorted[3] = highScores.getHigh4();
+            sorted[4] = highScores.getHigh5();
+    }
+
+    private void takeScoresOffSorted(){
+            highScores.setHigh1(sorted[0]);
+            highScores.setHigh2(sorted[1]);
+            highScores.setHigh3(sorted[2]);
+            highScores.setHigh4(sorted[3]);
+            highScores.setHigh5(sorted[4]);
+    }
+
+    private void bubbleSort(){
+        int n = sorted.length;
+        String temp;
+        if(gameMode == 1){ //first highscore is the lowest number
+            for(int i=0; i < n; i++){
+                for(int j=1; j < (n-i); j++){
+                    if(sorted[j-1].compareTo(sorted[j]) > 0){
+                        temp = sorted[j-1];
+                        sorted[j-1] = sorted[j];
+                        sorted[j] = temp;
+                    }
+                }
+            }
+        }else if(gameMode ==2){ //first highscore is the highest number
+            for(int i=0; i < n; i++){
+                for(int j=1; j < (n-i); j++){
+                    if(sorted[j-1].compareTo(sorted[j]) < 0){
+                        temp = sorted[j-1];
+                        sorted[j-1] = sorted[j];
+                        sorted[j] = temp;
+                    }
+                }
+            }
+        }
+
+    }
+
 }

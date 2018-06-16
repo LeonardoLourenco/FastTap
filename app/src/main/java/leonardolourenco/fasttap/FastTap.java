@@ -295,11 +295,11 @@ public class FastTap {
         return RandomSec;
     }
 
-    public int getgStar() {
+    public int getGStar() {
         return gStar;
     }
 
-    public void setgStar(int gStar) {
+    public void setGStar(int gStar) {
         this.gStar = gStar;
     }
 
