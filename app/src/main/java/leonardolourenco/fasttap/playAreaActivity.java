@@ -111,7 +111,6 @@ public class playAreaActivity extends AppCompatActivity {
                     new String[] { Long.toString(user.getId()) , Integer.toString(gameMode) },null,null,null);
             cursorHighScore.moveToFirst();
             highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
-            user.getGStar();
         }
 
         placeScoresOnSorted();
