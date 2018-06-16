@@ -9,10 +9,19 @@ public class DbTableUsers implements BaseColumns {
     public static final String TABLENAME = "Users";
     public static final String FIELD_USER_NAME = "UserName";
     public static final String FIELD_GSTAR = "GStar";
+    public static final String FIELD_BOUGHT_SKIN0 = "BoughtSkin0";
+    public static final String FIELD_BOUGHT_SKIN1 = "BoughtSkin1";
+    public static final String FIELD_BOUGHT_SKIN2 = "BoughtSkin2";
+    public static final String FIELD_BOUGHT_SKIN3 = "BoughtSkin3";
+    public static final String FIELD_BOUGHT_SKIN4 = "BoughtSkin4";
+    public static final String FIELD_BOUGHT_SKIN5 = "BoughtSkin5";
+
 
     private SQLiteDatabase db;
 
-    public static final String [] ALL_COLUMNS = new String[] {_ID,FIELD_USER_NAME,FIELD_GSTAR};
+    public static final String [] ALL_COLUMNS = new String[] {_ID,FIELD_USER_NAME,FIELD_GSTAR,
+                            FIELD_BOUGHT_SKIN0,FIELD_BOUGHT_SKIN1,FIELD_BOUGHT_SKIN2,
+                            FIELD_BOUGHT_SKIN3,FIELD_BOUGHT_SKIN4,FIELD_BOUGHT_SKIN5};
 
     public DbTableUsers(SQLiteDatabase db){
         this.db= db;
@@ -23,7 +32,13 @@ public class DbTableUsers implements BaseColumns {
                 "CREATE TABLE " + TABLENAME + "(" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         FIELD_USER_NAME + " TEXT NOT NULL," +
-                        FIELD_GSTAR + " INTEGER " +
+                        FIELD_GSTAR + " INTEGER," +
+                        FIELD_BOUGHT_SKIN0 + " INTEGER," +
+                        FIELD_BOUGHT_SKIN1 + " INTEGER," +
+                        FIELD_BOUGHT_SKIN2 + " INTEGER," +
+                        FIELD_BOUGHT_SKIN3 + " INTEGER," +
+                        FIELD_BOUGHT_SKIN4 + " INTEGER," +
+                        FIELD_BOUGHT_SKIN5 + " INTEGER" +
                         ")"
         );
 
@@ -35,6 +50,12 @@ public class DbTableUsers implements BaseColumns {
         values.put(_ID,users.getId());
         values.put(FIELD_USER_NAME,users.getUserName());
         values.put(FIELD_GSTAR,users.getGStar());
+        values.put(FIELD_BOUGHT_SKIN0,users.getBoughtSkin0());
+        values.put(FIELD_BOUGHT_SKIN1,users.getBoughtSkin1());
+        values.put(FIELD_BOUGHT_SKIN2,users.getBoughtSkin2());
+        values.put(FIELD_BOUGHT_SKIN3,users.getBoughtSkin3());
+        values.put(FIELD_BOUGHT_SKIN4,users.getBoughtSkin4());
+        values.put(FIELD_BOUGHT_SKIN5,users.getBoughtSkin5());
 
         return values;
     }
@@ -43,12 +64,24 @@ public class DbTableUsers implements BaseColumns {
         final int posId = cursor.getColumnIndex(_ID);
         final int posUserName = cursor.getColumnIndex(FIELD_USER_NAME);
         final int posGStar = cursor.getColumnIndex(FIELD_GSTAR);
+        final int posBoughtSKin0 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN0);
+        final int posBoughtSKin1 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN1);
+        final int posBoughtSKin2 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN2);
+        final int posBoughtSKin3 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN3);
+        final int posBoughtSKin4 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN4);
+        final int posBoughtSKin5 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN5);
 
         Users user = new Users();
 
         user.setId(cursor.getInt(posId));
         user.setUserName(cursor.getString(posUserName));
         user.setGStar(cursor.getInt(posGStar));
+        user.setBoughtSkin0(cursor.getInt(posBoughtSKin0));
+        user.setBoughtSkin1(cursor.getInt(posBoughtSKin1));
+        user.setBoughtSkin2(cursor.getInt(posBoughtSKin2));
+        user.setBoughtSkin3(cursor.getInt(posBoughtSKin3));
+        user.setBoughtSkin4(cursor.getInt(posBoughtSKin4));
+        user.setBoughtSkin5(cursor.getInt(posBoughtSKin5));
 
 
         return user;

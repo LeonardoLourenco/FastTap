@@ -2,6 +2,8 @@ package leonardolourenco.fasttap;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -20,8 +22,8 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
-    private HighScores highScores;
-    private Users users;
+    private Cursor cursor;
+    private Users user;
     private int gStar;
     private String username = "NoName";
     private TextView textViewGStarCountMain;
@@ -32,49 +34,80 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gStar= getIntent().getIntExtra("gStar",0);
 
         textViewGStarCountMain = (TextView) findViewById(R.id.textViewGStarCountMain);
+
+        //Open DB
+        DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
+        //Read from the database
+        SQLiteDatabase db = dbFastTapOpenHelper.getReadableDatabase();
+
+        final DbTableUsers tableUsers = new DbTableUsers(db);
+        cursor = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
+
+        if(cursor.getCount() == 0){  //It didnt find any user so we need to creat one
+
+            //ask the user for his name
+            final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Hey there");
+            alertDialog.setMessage("In order to play you need to tell us your username");
+
+            final EditText input = new EditText(MainActivity.this);
+            ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.MATCH_PARENT,
+                    ConstraintLayout.LayoutParams.MATCH_PARENT);
+            input.setLayoutParams(lp);
+            alertDialog.setView(input);
+
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+            alertDialog.show();
+            // with this the dialog will not let user do other actions till the user presses ok
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Boolean wantToCloseDialog = false;
+                    if(input.getText().toString().compareTo("") == 0){      //user still hasn't wrote anything
+                        input.setError("You haven't written anything yet.");
+                    }else if(input.getText().toString().contains(" ")) {
+                        input.setError("No spaces allowed.");
+                    }else{
+                        username = input.getText().toString();
+                        user.setUserName(username);
+                        user.setGStar(0);
+                        user.setBoughtSkin0(1);
+                        user.setBoughtSkin1(0);
+                        user.setBoughtSkin2(0);
+                        user.setBoughtSkin3(0);
+                        user.setBoughtSkin4(0);
+                        user.setBoughtSkin5(0);
+                        tableUsers.insert(DbTableUsers.getContentValues(user));
+                        cursor = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
+                        wantToCloseDialog = true;
+                    }
+                    if(wantToCloseDialog)
+                        alertDialog.dismiss();
+                }
+            });
+        }
+
+        user = tableUsers.getCurrentUserFromCursor(cursor);
+
+
+
+
+
+
+
         textViewGStarCountMain.setText(gStar+"");
 
-        //ask the user for his name
-        final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Hey there");
-        alertDialog.setMessage("In order to play you need to tell us your username");
 
-        final EditText input = new EditText(MainActivity.this);
-        ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                ConstraintLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        alertDialog.setView(input);
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-        alertDialog.show();
-        // with this the dialog will not let user do other actions till the user presses ok
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Boolean wantToCloseDialog = false;
-                if(input.getText().toString().compareTo("") == 0){      //user still hasn't wrote anything
-                    input.setError("You haven't written anything yet.");
-                }else if(input.getText().toString().contains(" ")) {
-                    input.setError("No spaces allowed.");
-                }else{
-                    username = input.getText().toString();
-                    wantToCloseDialog = true;
-                }
-                if(wantToCloseDialog)
-                    alertDialog.dismiss();
-            }
-        });
 
 
     }
