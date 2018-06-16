@@ -23,9 +23,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     private Cursor cursor;
-    private Users user;
-    private int gStar;
-    private String username = "NoName";
+    private Users user = new Users();
     private TextView textViewGStarCountMain;
 
 
@@ -40,17 +38,30 @@ public class MainActivity extends AppCompatActivity {
         //Open DB
         DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
         //Read from the database
-        SQLiteDatabase db = dbFastTapOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = dbFastTapOpenHelper.getWritableDatabase();
 
         final DbTableUsers tableUsers = new DbTableUsers(db);
         cursor = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
 
-        if(cursor.getCount() == 0){  //It didnt find any user so we need to creat one
+        if(cursor.getCount() > 0){  //It found a user
+            cursor.moveToFirst();
+            user = tableUsers.getCurrentUserFromCursor(cursor);
+        }else{
+            //Initialize default user we need to do this because android doesnt know that the user will get stuck on the alertDialog
+            user.setUserName("ZéNinguem");
+            user.setGStar(0);
+            user.setBoughtSkin0(1);
+            user.setBoughtSkin1(0);
+            user.setBoughtSkin2(0);
+            user.setBoughtSkin3(0);
+            user.setBoughtSkin4(0);
+            user.setBoughtSkin5(0);
+            final long id = tableUsers.insert(DbTableUsers.getContentValues(user));   //we need this id so we can update the correct one after the alertdialog
 
             //ask the user for his name
             final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
             alertDialog.setTitle("Hey there");
-            alertDialog.setMessage("In order to play you need to tell us your username");
+            alertDialog.setMessage("Tell us your username so we can save your progress");
 
             final EditText input = new EditText(MainActivity.this);
             ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(
@@ -78,38 +89,22 @@ public class MainActivity extends AppCompatActivity {
                     }else if(input.getText().toString().contains(" ")) {
                         input.setError("No spaces allowed.");
                     }else{
-                        username = input.getText().toString();
-                        user.setUserName(username);
-                        user.setGStar(0);
-                        user.setBoughtSkin0(1);
-                        user.setBoughtSkin1(0);
-                        user.setBoughtSkin2(0);
-                        user.setBoughtSkin3(0);
-                        user.setBoughtSkin4(0);
-                        user.setBoughtSkin5(0);
-                        tableUsers.insert(DbTableUsers.getContentValues(user));
+                        user.setUserName(input.getText().toString());
+                        tableUsers.update(DbTableUsers.getContentValues(user),DbTableUsers._ID + "=?",
+                                new String[] { Long.toString(id) });
                         cursor = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
+                        cursor.moveToFirst();
                         wantToCloseDialog = true;
                     }
                     if(wantToCloseDialog)
                         alertDialog.dismiss();
                 }
             });
+
         }
 
-        user = tableUsers.getCurrentUserFromCursor(cursor);
-
-
-
-
-
-
-
-        textViewGStarCountMain.setText(gStar+"");
-
-
-
-
+        textViewGStarCountMain.setText(user.getGStar()+"");
+        //create texView that displays user name .setText(user.getUserName()+"");
     }
 
     @Override
@@ -138,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this,playAreaActivity.class);
         intent.putExtra("gameMode",2);
-        intent.putExtra("gStar",gStar);
         startActivity(intent);
 
     }
@@ -147,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this,playAreaActivity.class);
         intent.putExtra("gameMode",1);
-        intent.putExtra("gStar",gStar);
         startActivity(intent);
 
     }

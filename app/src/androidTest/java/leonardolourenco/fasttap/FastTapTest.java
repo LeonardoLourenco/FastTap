@@ -49,6 +49,12 @@ public class FastTapTest {
         Users user = new Users();
         user.setUserName("Xico");
         user.setGStar(10);
+        user.setBoughtSkin0(1);
+        user.setBoughtSkin1(0);
+        user.setBoughtSkin2(0);
+        user.setBoughtSkin3(0);
+        user.setBoughtSkin4(0);
+        user.setBoughtSkin5(0);
 
         //Insert/Create (C)RUD
         long id = TableUsers.insert(DbTableUsers.getContentValues(user));
@@ -56,7 +62,10 @@ public class FastTapTest {
         assertNotEquals("Failed to insert a user",-1,id);
 
         //Read/Query C(R)UD
-        user = ReadFirstUser(TableUsers,"Xico", 10,id);
+        user = ReadFirstUser(TableUsers,"Xico", 10 ,
+                1,0,
+                0,0,
+                0,0,id);
 
         //Update CR(U)D
         user.setUserName("Francisco");
@@ -69,7 +78,10 @@ public class FastTapTest {
 
         assertEquals("Failed to update user", 1, rowsAffected);
 
-        user = ReadFirstUser(TableUsers,"Francisco", 20,id);
+        user = ReadFirstUser(TableUsers,"Francisco", 20,
+                1,0,
+                0,0,
+                0,0,id);
 
         //Delete CRU(D)
         rowsAffected = TableUsers.delete(
@@ -167,7 +179,9 @@ public class FastTapTest {
     }
 
     @NonNull
-    private Users ReadFirstUser(DbTableUsers TableUsers, String expectedusername, int expectedgstar, long expectedid) {
+    private Users ReadFirstUser(DbTableUsers TableUsers, String expectedusername, int expectedgstar, int expectedboughtskin0,
+                                int expectedboughtskin1, int expectedboughtskin2, int expectedboughtskin3,
+                                int expectedboughtskin4, int expectedboughtskin5, long expectedid) {
         Cursor cursor = TableUsers.query(DbTableUsers.ALL_COLUMNS, null, null, null, null, null);
         assertEquals("Failed to read categories",1, cursor.getCount());
 
@@ -176,6 +190,12 @@ public class FastTapTest {
         Users user = DbTableUsers.getCurrentUserFromCursor(cursor);
         assertEquals("Incorrect user gstar",expectedgstar,user.getGStar());
         assertEquals("Incorrect user name",expectedusername,user.getUserName());
+        assertEquals("Incorrect user boughtskin0",expectedboughtskin0,user.getBoughtSkin0());
+        assertEquals("Incorrect user boughtskin1",expectedboughtskin1,user.getBoughtSkin1());
+        assertEquals("Incorrect user boughtskin2",expectedboughtskin2,user.getBoughtSkin2());
+        assertEquals("Incorrect user boughtskin3",expectedboughtskin3,user.getBoughtSkin3());
+        assertEquals("Incorrect user boughtskin4",expectedboughtskin4,user.getBoughtSkin4());
+        assertEquals("Incorrect user boughtskin5",expectedboughtskin5,user.getBoughtSkin5());
         assertEquals("Incorrect user id",expectedid,user.getId());
         return user;
     }

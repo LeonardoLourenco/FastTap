@@ -11,6 +11,8 @@ public class Users {
     private int BoughtSkin4;    //Knights Skin
     private int BoughtSkin5;    //Samurais Skin
 
+
+
     public int getId() {
         return id;
     }
