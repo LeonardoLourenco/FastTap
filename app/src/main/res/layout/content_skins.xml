@@ -9,4 +9,16 @@
     tools:context=".skinsActivity"
     tools:showIn="@layout/activity_skins">
 
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:antialias="false"
+        android:onClick="goToMainActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/backarrow" />
 </android.support.constraint.ConstraintLayout>
