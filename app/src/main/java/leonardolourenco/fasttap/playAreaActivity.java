@@ -36,6 +36,7 @@ public class playAreaActivity extends AppCompatActivity {
     private int gameMode = 0;
     private ConstraintLayout constraintLayout;
     private String[] sorted = new String[6];
+    private int[] sortedint = new int[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,6 +265,7 @@ public class playAreaActivity extends AppCompatActivity {
     private void bubbleSort(){
         int n = sorted.length;
         String temp;
+        int tempi;
         if(gameMode == 1){ //first highscore is the lowest number
             for(int i=0; i < n; i++){
                 for(int j=1; j < (n-i); j++){
@@ -275,15 +277,24 @@ public class playAreaActivity extends AppCompatActivity {
                 }
             }
         }else if(gameMode ==2){ //first highscore is the highest number
+            for (int i = 0; i < n; i++) {
+                sortedint[i] = Integer.parseInt(sorted[i]);
+            }
+
             for(int i=0; i < n; i++){
                 for(int j=1; j < (n-i); j++){
-                    if(sorted[j-1].compareTo(sorted[j]) < 0){
-                        temp = sorted[j-1];
-                        sorted[j-1] = sorted[j];
-                        sorted[j] = temp;
+                    if(sortedint[j-1] < sortedint[j]){
+                        tempi = sortedint[j-1];
+                        sortedint[j-1] = sortedint[j];
+                        sortedint[j] = tempi;
                     }
                 }
             }
+
+            for (int i = 0; i < n; i++) {
+                sorted[i] = ""+sortedint[i];
+            }
+
         }
 
     }

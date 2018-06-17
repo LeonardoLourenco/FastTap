@@ -26,4 +26,6 @@
     <string name="title_activity_play_area">playAreaActivity</string>
     <string name="player_health">Player Health</string>
     <string name="title_activity_playing_area">PlayingAreaActivity</string>
+    <string name="title_activity_skins">skinsActivity</string>
+    <string name="title_activity_leaderboards">leaderboardsActivity</string>
 </resources>

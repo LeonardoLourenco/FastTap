@@ -148,4 +148,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void goToLeaderboards (View  view){
+        Intent intent = new Intent(this,leaderboardsActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSkins (View  view){
+        Intent intent = new Intent(this,skinsActivity.class);
+        startActivity(intent);
+    }
 }
