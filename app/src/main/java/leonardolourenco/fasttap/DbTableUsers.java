@@ -15,13 +15,15 @@ public class DbTableUsers implements BaseColumns {
     public static final String FIELD_BOUGHT_SKIN3 = "BoughtSkin3";
     public static final String FIELD_BOUGHT_SKIN4 = "BoughtSkin4";
     public static final String FIELD_BOUGHT_SKIN5 = "BoughtSkin5";
+    public static final String FIELD_SELECTED_SKIN = "SelectedSkin";
 
 
     private SQLiteDatabase db;
 
     public static final String [] ALL_COLUMNS = new String[] {_ID,FIELD_USER_NAME,FIELD_GSTAR,
                             FIELD_BOUGHT_SKIN0,FIELD_BOUGHT_SKIN1,FIELD_BOUGHT_SKIN2,
-                            FIELD_BOUGHT_SKIN3,FIELD_BOUGHT_SKIN4,FIELD_BOUGHT_SKIN5};
+                            FIELD_BOUGHT_SKIN3,FIELD_BOUGHT_SKIN4,FIELD_BOUGHT_SKIN5,
+                            FIELD_SELECTED_SKIN};
 
     public DbTableUsers(SQLiteDatabase db){
         this.db= db;
@@ -38,7 +40,8 @@ public class DbTableUsers implements BaseColumns {
                         FIELD_BOUGHT_SKIN2 + " INTEGER," +
                         FIELD_BOUGHT_SKIN3 + " INTEGER," +
                         FIELD_BOUGHT_SKIN4 + " INTEGER," +
-                        FIELD_BOUGHT_SKIN5 + " INTEGER" +
+                        FIELD_BOUGHT_SKIN5 + " INTEGER," +
+                        FIELD_SELECTED_SKIN + " INTEGER" +
                         ")"
         );
 
@@ -56,6 +59,7 @@ public class DbTableUsers implements BaseColumns {
         values.put(FIELD_BOUGHT_SKIN3,users.getBoughtSkin3());
         values.put(FIELD_BOUGHT_SKIN4,users.getBoughtSkin4());
         values.put(FIELD_BOUGHT_SKIN5,users.getBoughtSkin5());
+        values.put(FIELD_SELECTED_SKIN,users.getSelectedSkin());
 
         return values;
     }
@@ -64,24 +68,26 @@ public class DbTableUsers implements BaseColumns {
         final int posId = cursor.getColumnIndex(_ID);
         final int posUserName = cursor.getColumnIndex(FIELD_USER_NAME);
         final int posGStar = cursor.getColumnIndex(FIELD_GSTAR);
-        final int posBoughtSKin0 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN0);
-        final int posBoughtSKin1 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN1);
-        final int posBoughtSKin2 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN2);
-        final int posBoughtSKin3 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN3);
-        final int posBoughtSKin4 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN4);
-        final int posBoughtSKin5 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN5);
+        final int posBoughtSkin0 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN0);
+        final int posBoughtSkin1 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN1);
+        final int posBoughtSkin2 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN2);
+        final int posBoughtSkin3 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN3);
+        final int posBoughtSkin4 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN4);
+        final int posBoughtSkin5 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN5);
+        final int posSelectedSkin = cursor.getColumnIndex(FIELD_BOUGHT_SKIN5);
 
         Users user = new Users();
 
         user.setId(cursor.getInt(posId));
         user.setUserName(cursor.getString(posUserName));
         user.setGStar(cursor.getInt(posGStar));
-        user.setBoughtSkin0(cursor.getInt(posBoughtSKin0));
-        user.setBoughtSkin1(cursor.getInt(posBoughtSKin1));
-        user.setBoughtSkin2(cursor.getInt(posBoughtSKin2));
-        user.setBoughtSkin3(cursor.getInt(posBoughtSKin3));
-        user.setBoughtSkin4(cursor.getInt(posBoughtSKin4));
-        user.setBoughtSkin5(cursor.getInt(posBoughtSKin5));
+        user.setBoughtSkin0(cursor.getInt(posBoughtSkin0));
+        user.setBoughtSkin1(cursor.getInt(posBoughtSkin1));
+        user.setBoughtSkin2(cursor.getInt(posBoughtSkin2));
+        user.setBoughtSkin3(cursor.getInt(posBoughtSkin3));
+        user.setBoughtSkin4(cursor.getInt(posBoughtSkin4));
+        user.setBoughtSkin5(cursor.getInt(posBoughtSkin5));
+        user.setSelectedSkin(cursor.getInt(posSelectedSkin));
 
 
         return user;

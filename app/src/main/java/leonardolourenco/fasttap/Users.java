@@ -10,6 +10,7 @@ public class Users {
     private int BoughtSkin3;    //Ghosts Skin
     private int BoughtSkin4;    //Knights Skin
     private int BoughtSkin5;    //Samurais Skin
+    private int SelectedSkin;
 
 
 
@@ -83,5 +84,13 @@ public class Users {
 
     public void setBoughtSkin5(int boughtSkin5) {
         BoughtSkin5 = boughtSkin5;
+    }
+
+    public int getSelectedSkin() {
+        return SelectedSkin;
+    }
+
+    public void setSelectedSkin(int selectedSkin) {
+        SelectedSkin = selectedSkin;
     }
 }

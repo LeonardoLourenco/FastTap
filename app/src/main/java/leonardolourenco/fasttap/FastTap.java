@@ -24,7 +24,6 @@ public class FastTap {
     private int RandomSec;
     private int lives = 3;
     private int gStar = 0;                                  //Currency for Skins
-    private int selectedSkin = 0;                           //Skin selected in the skinActivity
     private int [] skin0ids = {R.drawable.testenemy4,R.drawable.testenemy1,R.drawable.testenemy2,R.drawable.testenemy3};
 
     private int [] heartsid = {R.drawable.hearts1,R.drawable.hearts2,R.drawable.hearts3,R.drawable.hearts4};
@@ -307,10 +306,11 @@ public class FastTap {
         return gameOver;
     }
 
-    public int[] getSelectedSkin() {
+    public int[] getSelectedSkinids(int selectedSkin) {
         switch (selectedSkin) {
             case 0:
                 return skin0ids;
+                //Other skins go here
         }
 
         return skin0ids;  //error situation

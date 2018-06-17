@@ -28,13 +28,12 @@ public class playAreaActivity extends AppCompatActivity {
     private Users user = new Users();
     private HighScores highScores = new HighScores();
     private ImageButton[][] buttons = new ImageButton[4][4];
-    private int[] currentSkin = game.getSelectedSkin();
+    private int[] currentSkin = new int[5];
     private Timer timerUpdateDisplay = new Timer();             //Timer used to update the display each 0,04 secs -> 40 milisecs
     private TextView textViewScore;
     private TextView textViewGStarCountPlay;
     private ImageView imageViewLife;
     private int gameMode = 0;
-    private ConstraintLayout constraintLayout;
     private String[] sorted = new String[6];
     private int[] sortedint = new int[6];
 
@@ -116,6 +115,7 @@ public class playAreaActivity extends AppCompatActivity {
 
         placeScoresOnSorted();
 
+        currentSkin = game.getSelectedSkinids(user.getSelectedSkin());
         game.setGStar(user.getGStar());
 
         game.newGame();

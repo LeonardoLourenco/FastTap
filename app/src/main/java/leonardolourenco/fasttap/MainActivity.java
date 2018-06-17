@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             user.setBoughtSkin3(0);
             user.setBoughtSkin4(0);
             user.setBoughtSkin5(0);
+            user.setSelectedSkin(0);
             final long id = tableUsers.insert(DbTableUsers.getContentValues(user));   //we need this id so we can update the correct one after the alertdialog
 
             //ask the user for his name
