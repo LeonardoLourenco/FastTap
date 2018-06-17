@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".leaderboardsActivity"
     tools:showIn="@layout/activity_leaderboards">
@@ -179,9 +180,10 @@
         android:layout_marginBottom="52dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
+        android:antialias="false"
         android:onClick="goToMainActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:srcCompat="@drawable/backarrow" />
 
 </android.support.constraint.ConstraintLayout>
