@@ -89,22 +89,22 @@ public class skinsActivity extends AppCompatActivity {
 
         switch (selectedSkin){
             case 0:
-                skinName = "Alpha";
+                skinName = getString(R.string.skinAlpha);
                 break;
             case 1:
-                skinName = "Slimes";
+                skinName = getString(R.string.skinSlimes);
                 break;
             case 2:
-                skinName = "Ghosts";
+                skinName = getString(R.string.skinGhosts);
                 break;
             case 3:
-                skinName = "Cookies";
+                skinName = getString(R.string.skinCookies);
                 break;
             case 4:
-                skinName = "Knights";
+                skinName = getString(R.string.skinKnights);
                 break;
             case 5:
-                skinName = "Samurais";
+                skinName = getString(R.string.skinSamurais);
                 break;
         }
 
@@ -114,43 +114,56 @@ public class skinsActivity extends AppCompatActivity {
             updateDisplay();
         }else {
             AlertDialog alertDialog = new AlertDialog.Builder(skinsActivity.this).create();
-            alertDialog.setTitle("Buying skin " + skinName);
-            alertDialog.setMessage("Are you sure you want to buy this skin? ");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Buy",
+            alertDialog.setTitle(getString(R.string.buying_skin) + skinName);
+            alertDialog.setMessage(getString(R.string.buy_check));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.buttonBuy),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {       //check if the user has GStar to buy the skin
-                            if(user.getGStar() >= 100){
-                                switch (selectedSkin){
-                                    case 0:
-                                        user.setBoughtSkin0(1);
-                                        break;
-                                    case 1:
-                                        user.setBoughtSkin1(1);
-                                        break;
-                                    case 2:
-                                        user.setBoughtSkin2(1);
-                                        break;
-                                    case 3:
-                                        user.setBoughtSkin3(1);
-                                        break;
-                                    case 4:
-                                        user.setBoughtSkin4(1);
-                                        break;
-                                    case 5:
-                                        user.setBoughtSkin5(1);
-                                        break;
+                            if(selectedSkin == 0 || selectedSkin == 1){
+                                if(user.getGStar() >= 50){
+                                    switch (selectedSkin){
+                                        case 0:
+                                            user.setBoughtSkin0(1);
+                                            break;
+                                        case 1:
+                                            user.setBoughtSkin1(1);
+                                            break;
+                                    }
+                                    user.setSelectedSkin(selectedSkin);
+                                    user.setGStar(user.getGStar() - 50);
+                                    updateUser();
+                                    updateDisplay();
+                                }else {
+                                    makeToast();
                                 }
-                                user.setSelectedSkin(selectedSkin);
-                                user.setGStar(user.getGStar()-100);
-                                updateUser();
-                                updateDisplay();
                             }else {
-                                makeToast();
+                                if (user.getGStar() >= 100) {
+                                    switch (selectedSkin) {
+                                        case 2:
+                                            user.setBoughtSkin2(1);
+                                            break;
+                                        case 3:
+                                            user.setBoughtSkin3(1);
+                                            break;
+                                        case 4:
+                                            user.setBoughtSkin4(1);
+                                            break;
+                                        case 5:
+                                            user.setBoughtSkin5(1);
+                                            break;
+                                    }
+                                    user.setSelectedSkin(selectedSkin);
+                                    user.setGStar(user.getGStar() - 100);
+                                    updateUser();
+                                    updateDisplay();
+                                } else {
+                                    makeToast();
+                                }
                             }
                             dialog.dismiss();
                         }
                     });
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.buttonCancel),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -173,65 +186,65 @@ public class skinsActivity extends AppCompatActivity {
 
         switch (user.getSelectedSkin()){
             case 0:
-                skinName = "Alpha";
+                skinName = getString(R.string.skinAlpha);
                 break;
             case 1:
-                skinName = "Slimes";
+                skinName = getString(R.string.skinSlimes);
                 break;
             case 2:
-                skinName = "Ghosts";
+                skinName = getString(R.string.skinGhosts);
                 break;
             case 3:
-                skinName = "Cookies";
+                skinName = getString(R.string.skinCookies);
                 break;
             case 4:
-                skinName = "Knights";
+                skinName = getString(R.string.skinKnights);
                 break;
             case 5:
-                skinName = "Samurais";
+                skinName = getString(R.string.skinSamurais);
                 break;
         }
                                                 //Change with correct skin resouces
         if(boughSkins[0] == 1){
-            textViewSkin0.setText("Bought");
+            textViewSkin0.setText(R.string.bought);
             imageButtonSkin0.setImageResource(R.drawable.testenemy1);
         }else{
-            textViewSkin0.setText("100");
+            textViewSkin0.setText(R.string.N50);
             imageButtonSkin0.setImageResource(R.drawable.testenemy5);
         }
         if(boughSkins[1] == 1){
-            textViewSkin1.setText("Bought");
+            textViewSkin1.setText(R.string.bought);
             imageButtonSkin1.setImageResource(R.drawable.testenemy1);
         }else{
-            textViewSkin1.setText("100");
+            textViewSkin1.setText(R.string.N50);
             imageButtonSkin1.setImageResource(R.drawable.testenemy5);
         }
         if(boughSkins[2] == 1){
-            textViewSkin2.setText("Bought");
+            textViewSkin2.setText(R.string.bought);
             imageButtonSkin2.setImageResource(R.drawable.testenemy1);
         }else{
-            textViewSkin2.setText("100");
+            textViewSkin2.setText(R.string.N100);
             imageButtonSkin2.setImageResource(R.drawable.testenemy5);
         }
         if(boughSkins[3] == 1){
-            textViewSkin3.setText("Bought");
+            textViewSkin3.setText(R.string.bought);
             imageButtonSkin3.setImageResource(R.drawable.testenemy1);
         }else{
-            textViewSkin3.setText("100");
+            textViewSkin3.setText(R.string.N100);
             imageButtonSkin3.setImageResource(R.drawable.testenemy5);
         }
         if(boughSkins[4] == 1){
-            textViewSkin4.setText("Bought");
+            textViewSkin4.setText(R.string.bought);
             imageButtonSkin4.setImageResource(R.drawable.testenemy1);
         }else{
-            textViewSkin4.setText("100");
+            textViewSkin4.setText(R.string.N100);
             imageButtonSkin4.setImageResource(R.drawable.testenemy5);
         }
         if(boughSkins[5] == 1){
-            textViewSkin5.setText("Bought");
+            textViewSkin5.setText(R.string.bought);
             imageButtonSkin5.setImageResource(R.drawable.testenemy1);
         }else{
-            textViewSkin5.setText("100");
+            textViewSkin5.setText(R.string.N100);
             imageButtonSkin5.setImageResource(R.drawable.testenemy5);
         }
 
@@ -240,7 +253,7 @@ public class skinsActivity extends AppCompatActivity {
     }
 
     private void makeToast(){
-        Toast.makeText(this, "You dont have enough Gold Stars to buy this skin",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.buy_check_failed,Toast.LENGTH_SHORT).show();
     }
 
     private void updateUser(){

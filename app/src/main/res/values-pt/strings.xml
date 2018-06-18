@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FastTap</string>
+    <string name="score">Pontuação :</string>
+    <string name="player_health">Vida do Jogador</string>
+    <string name="skinGhosts">Fantasmas</string>
+    <string name="skinCookies">Bolachas</string>
+    <string name="skinKnights">Cavaleiros</string>
+    <string name="buying_skin">"A comprar a skin "</string>
+    <string name="buy_check">Tens a certeza que queres comprar esta skin?</string>
+    <string name="buttonBuy">Comprar</string>
+    <string name="buttonCancel">Cancelar</string>
+    <string name="bought">Comprado</string>
+    <string name="buy_check_failed">Não tens Estrelas Douradas suficientes para comprar esta skin</string>
+    <string name="selected_skin">Skin Selecionada:</string>
+    <string name="hey_there">"Olá "</string>
+    <string name="ask_username">Diz-nos o teu nome de utilizador para podermos guardar o teu progresso</string>
+    <string name="no_chars">Ainda não escreveste nada.</string>
+    <string name="no_spaces">Espaços não são permitidos.</string>
+    <string name="gameOver">Este jogo acabou</string>
+    <string name="nice">Boa!!</string>
+    <string name="your_score_is">"A tua pontuação é "</string>
+    <string name="_1st_score">1ª Pontuação</string>
+    <string name="_2nd_score">2ª Pontuação</string>
+    <string name="_4th_score">4ª Pontuação</string>
+    <string name="_3rd_score">3ª Pontuação</string>
+    <string name="_5th_score">5ª Pontuação</string>
+    <string name="reaction_time_scores">Pontuações Reaction Time</string>
+    <string name="arcade_scores">Pontuações Arcade</string>
+</resources>

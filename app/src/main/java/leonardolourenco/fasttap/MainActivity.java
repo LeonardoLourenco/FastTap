@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
             //ask the user for his name
             final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("Hey there");
-            alertDialog.setMessage("Tell us your username so we can save your progress");
+            alertDialog.setTitle(getString(R.string.hey_there));
+            alertDialog.setMessage(getString(R.string.ask_username));
 
             final EditText input = new EditText(MainActivity.this);
             ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             input.setLayoutParams(lp);
             alertDialog.setView(input);
 
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.ok),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -88,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Boolean wantToCloseDialog = false;
                     if(input.getText().toString().compareTo("") == 0){      //user still hasn't wrote anything
-                        input.setError("You haven't written anything yet.");
+                        input.setError(getString(R.string.no_chars));
                     }else if(input.getText().toString().contains(" ")) {
-                        input.setError("No spaces allowed.");
+                        input.setError(getString(R.string.no_spaces));
                     }else{
                         user.setUserName(input.getText().toString());
                         tableUsers.update(DbTableUsers.getContentValues(user),DbTableUsers._ID + "=?",

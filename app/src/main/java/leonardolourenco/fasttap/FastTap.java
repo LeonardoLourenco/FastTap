@@ -16,6 +16,7 @@ public class FastTap {
 
     private BoardPiece [][] Board = new BoardPiece[4][4];   //Area of Play will have a 4x4 Layout
     private boolean gameOver = false;
+    private boolean mediumlevel = false;
     private boolean hardlevel = false;
     private int points = 0;                                 //Used in Arcade Mode
     private long currentSecs = 0;                           //Used in Reaction Time
@@ -121,12 +122,19 @@ public class FastTap {
                 if(gameOver){
                     stop();
                 }
-                if(points >= 350 && !hardlevel){
-                        hardlevel=true;
+                if(points >= 350 && !mediumlevel){
+                        mediumlevel=true;
                         spawnInterval = 250;
                         lifeTime = 15;
                         stop();
                         reScheduleArcade();
+                }
+                if(points >= 1100 && !hardlevel){
+                    hardlevel=true;
+                    spawnInterval = 125;
+                    lifeTime = 5;
+                    stop();
+                    reScheduleArcade();
                 }
             }
         },0, spawnInterval);
@@ -193,7 +201,7 @@ public class FastTap {
                 Board[rrow][rcol] = BoardPiece.GENEMY;
             } else if (RandomChance <= 50) {                            //35% chance
                 Board[rrow][rcol] = BoardPiece.BOMB;
-                enemyTimeSecs[rrow][rcol]= currentSecs+6;
+                enemyTimeSecs[rrow][rcol]= currentSecs+5;
                 enemyTimeMilli[rrow][rcol]= currentMilli;
             } else if (RandomChance <= 100) {                           //50% chance
                 Board[rrow][rcol] = BoardPiece.ENEMY;

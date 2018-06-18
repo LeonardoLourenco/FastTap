@@ -134,7 +134,7 @@ public class playAreaActivity extends AppCompatActivity {
 
     public void hit(View view){
         if(game.getgameOver()){
-            Toast.makeText(this, "This game has ended", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.gameOver, Toast.LENGTH_SHORT).show();
             return;
         }
         ImageButton b = (ImageButton) view;
@@ -215,9 +215,9 @@ public class playAreaActivity extends AppCompatActivity {
             takeScoresOffSorted();
             updateHighScoreAndUser();
             AlertDialog alertDialog = new AlertDialog.Builder(playAreaActivity.this).create();
-            alertDialog.setTitle("Nice!!");
-            alertDialog.setMessage("Your score is " + textViewScore.getText());
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+            alertDialog.setTitle(getString(R.string.nice));
+            alertDialog.setMessage(getString(R.string.your_score_is) + textViewScore.getText());
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             startActivity(intent);

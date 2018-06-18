@@ -1,31 +1,61 @@
 <resources>
     <string name="app_name">FastTap</string>
-    <string name="action_settings">Settings</string>
-    <string name="fast_tap">Fast Tap</string>
-    <string name="button00">Button00</string>
-    <string name="button01">Button01</string>
-    <string name="button02">Button02</string>
-    <string name="button03">Button03</string>
-    <string name="button10">Button10</string>
-    <string name="button11">Button11</string>
-    <string name="button12">Button12</string>
-    <string name="button13">Button13</string>
-    <string name="button20">Button20</string>
-    <string name="button21">Button21</string>
-    <string name="button22">Button22</string>
-    <string name="button23">Button23</string>
-    <string name="button30">Button30</string>
-    <string name="button31">Button31</string>
-    <string name="button32">Button32</string>
-    <string name="button33">Button33</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="fast_tap" translatable="false">Fast Tap</string>
+    <string name="button00" translatable="false">Button00</string>
+    <string name="button01" translatable="false">Button01</string>
+    <string name="button02" translatable="false">Button02</string>
+    <string name="button03" translatable="false">Button03</string>
+    <string name="button10" translatable="false">Button10</string>
+    <string name="button11" translatable="false">Button11</string>
+    <string name="button12" translatable="false">Button12</string>
+    <string name="button13" translatable="false">Button13</string>
+    <string name="button20" translatable="false">Button20</string>
+    <string name="button21" translatable="false">Button21</string>
+    <string name="button22" translatable="false">Button22</string>
+    <string name="button23" translatable="false">Button23</string>
+    <string name="button30" translatable="false">Button30</string>
+    <string name="button31" translatable="false">Button31</string>
+    <string name="button32" translatable="false">Button32</string>
+    <string name="button33" translatable="false">Button33</string>
     <string name="score">Score :</string>
-    <string name="leaderboards">Leaderboards</string>
-    <string name="skins">Skins</string>
-    <string name="arcade">Arcade</string>
-    <string name="reaction_time">Reaction Time</string>
-    <string name="title_activity_play_area">playAreaActivity</string>
+    <string name="leaderboards" translatable="false">Leaderboards</string>
+    <string name="skins" translatable="false">Skins</string>
+    <string name="arcade" translatable="false">Arcade</string>
+    <string name="reaction_time" translatable="false">Reaction Time</string>
+    <string name="title_activity_play_area" translatable="false">playAreaActivity</string>
     <string name="player_health">Player Health</string>
-    <string name="title_activity_playing_area">PlayingAreaActivity</string>
-    <string name="title_activity_skins">skinsActivity</string>
-    <string name="title_activity_leaderboards">leaderboardsActivity</string>
+    <string name="title_activity_playing_area" translatable="false">PlayingAreaActivity</string>
+    <string name="title_activity_skins" translatable="false">skinsActivity</string>
+    <string name="title_activity_leaderboards" translatable="false">leaderboardsActivity</string>
+    <string name="skinAlpha" translatable="false">Alpha</string>
+    <string name="skinSlimes" translatable="false">Slimes</string>
+    <string name="skinGhosts">Ghosts</string>
+    <string name="skinCookies">Cookies</string>
+    <string name="skinKnights">Knights</string>
+    <string name="skinSamurais" translatable="false">Samurais</string>
+    <string name="buying_skin">Buying skin </string>
+    <string name="buy_check">Are you sure you want to buy this skin?</string>
+    <string name="buttonBuy">Buy</string>
+    <string name="buttonCancel">Cancel</string>
+    <string name="bought">Bought</string>
+    <string name="buy_check_failed">You dont have enough Gold Stars to buy this skin</string>
+    <string name="N100" translatable="false">100</string>
+    <string name="N50" translatable="false">50</string>
+    <string name="selected_skin">Selected Skin:</string>
+    <string name="hey_there">Hey there</string>
+    <string name="ask_username">Tell us your username so we can save your progress</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="no_chars">You haven\'t written anything yet.</string>
+    <string name="no_spaces">No spaces allowed.</string>
+    <string name="gameOver">This game has ended</string>
+    <string name="nice">Nice!!</string>
+    <string name="your_score_is">Your score is</string>
+    <string name="_1st_score">1st Score</string>
+    <string name="_2nd_score">2nd Score</string>
+    <string name="_4th_score">4th Score</string>
+    <string name="_3rd_score">3rd Score</string>
+    <string name="_5th_score">5th Score</string>
+    <string name="reaction_time_scores">Reaction Time Scores</string>
+    <string name="arcade_scores">Arcade Scores</string>
 </resources>
