@@ -34,7 +34,7 @@
     <string name="skinCookies">Cookies</string>
     <string name="skinKnights">Knights</string>
     <string name="skinSamurais" translatable="false">Samurais</string>
-    <string name="buying_skin">Buying skin </string>
+    <string name="buying_skin">"Buying skin "</string>
     <string name="buy_check">Are you sure you want to buy this skin?</string>
     <string name="buttonBuy">Buy</string>
     <string name="buttonCancel">Cancel</string>
