@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class leaderboardsActivity extends AppCompatActivity {
@@ -20,6 +21,8 @@ public class leaderboardsActivity extends AppCompatActivity {
     private TextView textViewHigh3;
     private TextView textViewHigh4;
     private TextView textViewHigh5;
+    private Button buttonHighReact;
+    private Button buttonHighArcade;
 
 
     @Override
@@ -32,6 +35,11 @@ public class leaderboardsActivity extends AppCompatActivity {
         textViewHigh3 = (TextView) findViewById(R.id.textViewHigh3);
         textViewHigh4 = (TextView) findViewById(R.id.textViewHigh4);
         textViewHigh5 = (TextView) findViewById(R.id.textViewHigh5);
+        buttonHighReact = (Button) findViewById(R.id.buttonHighReact);
+        buttonHighArcade = (Button) findViewById(R.id.buttonHighArcade);
+
+        buttonHighReact.setTextColor(getResources().getColor(R.color.colorAccent));
+        buttonHighArcade.setTextColor(getResources().getColor(R.color.buttondefault));
 
         //Open DB
         DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
@@ -59,6 +67,8 @@ public class leaderboardsActivity extends AppCompatActivity {
 
 
     public void highReact(View view){
+        buttonHighReact.setTextColor(getResources().getColor(R.color.colorAccent));
+        buttonHighArcade.setTextColor(getResources().getColor(R.color.buttondefault));
         //Open DB
         DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
         //Read from the database
@@ -84,6 +94,8 @@ public class leaderboardsActivity extends AppCompatActivity {
     }
 
     public void highArcade(View view){
+        buttonHighReact.setTextColor(getResources().getColor(R.color.buttondefault));
+        buttonHighArcade.setTextColor(getResources().getColor(R.color.colorAccent));
         //Open DB
         DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
         //Read from the database
