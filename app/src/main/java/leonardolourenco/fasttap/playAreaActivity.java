@@ -115,7 +115,7 @@ public class playAreaActivity extends AppCompatActivity {
 
         placeScoresOnSorted();
 
-        currentSkin = game.getSelectedSkinids(user.getSelectedSkin());
+        currentSkin = game.getSelectedSkinIds(user.getSelectedSkin());
         game.setGStar(user.getGStar());
 
         game.newGame();
@@ -196,6 +196,7 @@ public class playAreaActivity extends AppCompatActivity {
 
         if (gameMode == 1) {
             textViewScore.setText(game.getCurrentSecs() + ":" + game.getCurrentMilli());
+            imageViewLife.setImageResource(currentSkin[0]);         //we want it to be invisible/non existent here
         }else if(gameMode == 2){
             textViewScore.setText(game.getPoints()+"");
             imageViewLife.setImageResource(game.getHearts());

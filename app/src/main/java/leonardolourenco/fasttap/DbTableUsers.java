@@ -74,7 +74,7 @@ public class DbTableUsers implements BaseColumns {
         final int posBoughtSkin3 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN3);
         final int posBoughtSkin4 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN4);
         final int posBoughtSkin5 = cursor.getColumnIndex(FIELD_BOUGHT_SKIN5);
-        final int posSelectedSkin = cursor.getColumnIndex(FIELD_BOUGHT_SKIN5);
+        final int posSelectedSkin = cursor.getColumnIndex(FIELD_SELECTED_SKIN);
 
         Users user = new Users();
 

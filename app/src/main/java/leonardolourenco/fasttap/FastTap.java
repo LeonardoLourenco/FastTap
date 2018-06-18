@@ -23,8 +23,8 @@ public class FastTap {
     private Random random = new Random();
     private int RandomSec;
     private int lives = 3;
-    private int gStar = 0;                                  //Currency for Skins
-    private int [] skin0ids = {R.drawable.testenemy4,R.drawable.testenemy1,R.drawable.testenemy2,R.drawable.testenemy3};
+    private int gStar = 0;                                  //Currency for Skins      //skin order Invisible,Enemy,Gold Enemy, Bomb, Silhouette
+    private int [] skin0ids = {R.drawable.testenemy4,R.drawable.testenemy1,R.drawable.testenemy2,R.drawable.testenemy3,R.drawable.testenemy5};
 
     private int [] heartsid = {R.drawable.hearts1,R.drawable.hearts2,R.drawable.hearts3,R.drawable.hearts4};
     private long [][] enemyTimeMilli = new long[4][4];
@@ -306,10 +306,20 @@ public class FastTap {
         return gameOver;
     }
 
-    public int[] getSelectedSkinids(int selectedSkin) {
+    public int[] getSelectedSkinIds(int selectedSkin) {
         switch (selectedSkin) {
             case 0:
                 return skin0ids;
+            case 1:
+                //return ;
+            case 2:
+
+            case 3:
+
+            case 4:
+
+            case 5:
+
                 //Other skins go here
         }
 
