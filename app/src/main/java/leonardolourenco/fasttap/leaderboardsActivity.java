@@ -124,4 +124,9 @@ public class leaderboardsActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

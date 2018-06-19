@@ -268,4 +268,11 @@ public class skinsActivity extends AppCompatActivity {
                 new String[] { Long.toString(user.getId()) });
         db.close();
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

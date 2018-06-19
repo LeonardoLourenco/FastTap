@@ -27,4 +27,5 @@
     <string name="_5th_score">5ª Pontuação</string>
     <string name="reaction_time_scores">Pontuações Reaction Time</string>
     <string name="arcade_scores">Pontuações Arcade</string>
+    <string name="leaderboard_check">De modo a veres os leaderboards precisas de jogar, pelo menos, 1 dos modos de jogo</string>
 </resources>

@@ -50,7 +50,7 @@
     <string name="no_spaces">No spaces allowed.</string>
     <string name="gameOver">This game has ended</string>
     <string name="nice">Nice!!</string>
-    <string name="your_score_is">Your score is</string>
+    <string name="your_score_is">"Your score is "</string>
     <string name="_1st_score">1st Score</string>
     <string name="_2nd_score">2nd Score</string>
     <string name="_4th_score">4th Score</string>
@@ -58,4 +58,5 @@
     <string name="_5th_score">5th Score</string>
     <string name="reaction_time_scores">Reaction Time Scores</string>
     <string name="arcade_scores">Arcade Scores</string>
+    <string name="leaderboard_check">In order to see the leaderboards you need to play, at least, one of the game modes</string>
 </resources>

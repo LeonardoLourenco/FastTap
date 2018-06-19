@@ -299,5 +299,10 @@ public class playAreaActivity extends AppCompatActivity {
         }
 
     }
+    public void onBackPressed() {
+        super.onBackPressed();
+        game.stop();
+        this.finish();
+    }
 
 }
