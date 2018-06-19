@@ -78,8 +78,7 @@ public class skinsActivity extends AppCompatActivity {
 
 
     public void goToMainActivity(View view){
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 
     public void touchSkin(View view){
