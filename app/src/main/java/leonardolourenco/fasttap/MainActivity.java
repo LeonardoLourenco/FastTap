@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Cursor cursor;
     private Users user = new Users();
-    private TextView textViewGStarCountMain;
     private TextView textViewUserName;
 
 
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewGStarCountMain = (TextView) findViewById(R.id.textViewGStarCountMain);
         textViewUserName = (TextView) findViewById(R.id.textViewUserName);
 
         //Open DB
@@ -111,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
-
-        textViewGStarCountMain.setText(user.getGStar()+"");
+        
         textViewUserName.setText(user.getUserName()+"");
         if(user.getUserName()==null){
             textViewUserName.setText("");
