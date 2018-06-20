@@ -213,10 +213,10 @@ public class skinsActivity extends AppCompatActivity {
         }
         if(boughSkins[1] == 1){
             textViewSkin1.setText(R.string.bought);
-            imageButtonSkin1.setImageResource(R.drawable.testenemy1);
+            imageButtonSkin1.setImageResource(R.drawable.slimes1);
         }else{
             textViewSkin1.setText(R.string.N50);
-            imageButtonSkin1.setImageResource(R.drawable.testenemy5);
+            imageButtonSkin1.setImageResource(R.drawable.slimes3);
         }
         if(boughSkins[2] == 1){
             textViewSkin2.setText(R.string.bought);
@@ -271,7 +271,5 @@ public class skinsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 }

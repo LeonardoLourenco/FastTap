@@ -220,7 +220,7 @@ public class playAreaActivity extends AppCompatActivity {
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(intent);
+                            playAreaActivity.this.finish();
                             dialog.dismiss();
                         }
                     });
