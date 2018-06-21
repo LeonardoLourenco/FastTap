@@ -59,4 +59,14 @@
     <string name="reaction_time_scores">Reaction Time Scores</string>
     <string name="arcade_scores">Arcade Scores</string>
     <string name="leaderboard_check">In order to see the leaderboards you need to play, at least, one of the game modes</string>
+    <string name="title_activity_credits" translatable="false">CreditsActivity</string>
+    <string name="email" translatable="false"><a href="wildleoknight@gmail.com">wildleoknight@gmail.com</a></string>
+    <string name="discord" translatable="false"><a href="https://discordapp.com/users/187598543161131009/">Discord</a></string>
+    <string name="instagram" translatable="false"><a href="https://www.instagram.com/wildleoknight/">Instagram</a></string>
+    <string name="tumblr" translatable="false"><a href="https://wildleoknight.tumblr.com/">Tumblr</a></string>
+    <string name="twitter" translatable="false"><a href="https://twitter.com/WildLeoKnight">Twitter</a></string>
+    <string name="contacts">Contacts:</string>
+    <string name="leonardo_wildleoknight_louren_o" translatable="false">Leonardo "WildLeoKnight" Lourenço</string>
+    <string name="all_code_and_art_done_by">All code and art done by:</string>
+    <string name="credits">Credits</string>
 </resources>
