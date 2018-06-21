@@ -66,7 +66,7 @@
     <string name="tumblr" translatable="false"><a href="https://wildleoknight.tumblr.com/">Tumblr</a></string>
     <string name="twitter" translatable="false"><a href="https://twitter.com/WildLeoKnight">Twitter</a></string>
     <string name="contacts">Contacts:</string>
-    <string name="leonardo_wildleoknight_louren_o" translatable="false">Leonardo "WildLeoKnight" Lourenço</string>
+    <string name="leonardo_wildleoknight_louren_o" translatable="false">Leonardo \"WildLeoKnight\" Lourenço</string>
     <string name="all_code_and_art_done_by">All code and art done by:</string>
     <string name="credits">Credits</string>
 </resources>

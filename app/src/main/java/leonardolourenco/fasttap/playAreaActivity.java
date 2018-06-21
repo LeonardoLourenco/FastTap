@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -224,6 +225,15 @@ public class playAreaActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
+            alertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {  //if the user presses the phone back button we want the app to close
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                    if(keyCode == KeyEvent.KEYCODE_BACK)
+                        dialog.dismiss();
+                    finish();
+                    return false;
+                }
+            });
             alertDialog.show();
         }
     }
