@@ -38,7 +38,7 @@ public class leaderboardsActivity extends AppCompatActivity {
         buttonHighReact = (Button) findViewById(R.id.buttonHighReact);
         buttonHighArcade = (Button) findViewById(R.id.buttonHighArcade);
 
-        buttonHighReact.setTextColor(getResources().getColor(R.color.colorAccent));
+        buttonHighReact.setTextColor(getResources().getColor(R.color.buttonselected));
         buttonHighArcade.setTextColor(getResources().getColor(R.color.buttondefault));
 
         //Open DB
@@ -67,7 +67,7 @@ public class leaderboardsActivity extends AppCompatActivity {
 
 
     public void highReact(View view){
-        buttonHighReact.setTextColor(getResources().getColor(R.color.colorAccent));
+        buttonHighReact.setTextColor(getResources().getColor(R.color.buttonselected));
         buttonHighArcade.setTextColor(getResources().getColor(R.color.buttondefault));
         //Open DB
         DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
@@ -95,7 +95,7 @@ public class leaderboardsActivity extends AppCompatActivity {
 
     public void highArcade(View view){
         buttonHighReact.setTextColor(getResources().getColor(R.color.buttondefault));
-        buttonHighArcade.setTextColor(getResources().getColor(R.color.colorAccent));
+        buttonHighArcade.setTextColor(getResources().getColor(R.color.buttonselected));
         //Open DB
         DbFastTapOpenHelper dbFastTapOpenHelper = new DbFastTapOpenHelper(getApplicationContext());
         //Read from the database

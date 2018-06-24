@@ -227,7 +227,7 @@ public class skinsActivity extends AppCompatActivity {
         }
         if(boughSkins[3] == 1){
             textViewSkin3.setText(R.string.bought);
-            imageButtonSkin3.setImageResource(R.drawable.cookiest1);
+            imageButtonSkin3.setImageResource(R.drawable.cookies1);
         }else{
             textViewSkin3.setText(R.string.N100);
             imageButtonSkin3.setImageResource(R.drawable.cookiest3);

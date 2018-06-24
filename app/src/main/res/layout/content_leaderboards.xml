@@ -19,6 +19,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="152dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -35,6 +36,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -51,6 +53,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/textView5"
@@ -67,6 +70,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -83,6 +87,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -128,6 +133,7 @@
         android:layout_marginTop="152dp"
         android:text="@string/_1st_score"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -140,6 +146,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/_2nd_score"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -152,6 +159,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/_3rd_score"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -164,6 +172,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/_4th_score"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -176,6 +185,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/_5th_score"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -187,6 +197,7 @@
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
         android:antialias="false"
+        android:background="@drawable/testenemy4"
         android:onClick="goToMainActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -28,7 +28,7 @@ public class FastTap {
     private int [] skin0ids = {R.drawable.testenemy4,R.drawable.testenemy1,R.drawable.testenemy2,R.drawable.testenemy3,R.drawable.testenemy5};
     private int [] skin1ids = {R.drawable.testenemy4,R.drawable.slimes1,R.drawable.slimes2,R.drawable.bomb,R.drawable.slimes3};
     private int [] skin2ids = {R.drawable.testenemy4,R.drawable.ghost1,R.drawable.ghost2,R.drawable.bomb,R.drawable.ghost3};
-    private int [] skin3ids = {R.drawable.testenemy4,R.drawable.cookiest1,R.drawable.cookiest2,R.drawable.bomb,R.drawable.cookiest3};
+    private int [] skin3ids = {R.drawable.testenemy4,R.drawable.cookies1,R.drawable.cookies2,R.drawable.bomb,R.drawable.cookiest3};
 
     private int [] heartsid = {R.drawable.hearts1,R.drawable.hearts2,R.drawable.hearts3,R.drawable.hearts4};
     private long [][] enemyTimeMilli = new long[4][4];
@@ -135,7 +135,7 @@ public class FastTap {
                 if(points >= 1100 && !hardlevel){
                     hardlevel=true;
                     spawnInterval = 125;
-                    lifeTime = 1;
+                    lifeTime = 10;
                     stop();
                     reScheduleArcade();
                 }
@@ -204,7 +204,7 @@ public class FastTap {
                 Board[rrow][rcol] = BoardPiece.GENEMY;
             } else if (RandomChance <= 50) {                            //35% chance
                 Board[rrow][rcol] = BoardPiece.BOMB;
-                enemyTimeSecs[rrow][rcol]= currentSecs+5;
+                enemyTimeSecs[rrow][rcol]= currentSecs+lifeTime/10+2;
                 enemyTimeMilli[rrow][rcol]= currentMilli;
             } else if (RandomChance <= 100) {                           //50% chance
                 Board[rrow][rcol] = BoardPiece.ENEMY;
