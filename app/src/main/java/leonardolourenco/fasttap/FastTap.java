@@ -28,6 +28,7 @@ public class FastTap {
     private int [] skin0ids = {R.drawable.testenemy4,R.drawable.testenemy1,R.drawable.testenemy2,R.drawable.testenemy3,R.drawable.testenemy5};
     private int [] skin1ids = {R.drawable.testenemy4,R.drawable.slimes1,R.drawable.slimes2,R.drawable.bomb,R.drawable.slimes3};
     private int [] skin2ids = {R.drawable.testenemy4,R.drawable.ghost1,R.drawable.ghost2,R.drawable.bomb,R.drawable.ghost3};
+    private int [] skin3ids = {R.drawable.testenemy4,R.drawable.cookiest1,R.drawable.cookiest2,R.drawable.bomb,R.drawable.cookiest3};
 
     private int [] heartsid = {R.drawable.hearts1,R.drawable.hearts2,R.drawable.hearts3,R.drawable.hearts4};
     private long [][] enemyTimeMilli = new long[4][4];
@@ -325,7 +326,7 @@ public class FastTap {
             case 2:
                 return skin2ids;
             case 3:
-
+                return skin3ids;
             case 4:
 
             case 5:
