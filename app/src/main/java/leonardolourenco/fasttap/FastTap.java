@@ -135,7 +135,7 @@ public class FastTap {
                 if(points >= 1100 && !hardlevel){
                     hardlevel=true;
                     spawnInterval = 125;
-                    lifeTime = 5;
+                    lifeTime = 1;
                     stop();
                     reScheduleArcade();
                 }
