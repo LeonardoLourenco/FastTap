@@ -234,10 +234,10 @@ public class skinsActivity extends AppCompatActivity {
         }
         if(boughSkins[4] == 1){
             textViewSkin4.setText(R.string.bought);
-            imageButtonSkin4.setImageResource(R.drawable.testenemy1);
+            imageButtonSkin4.setImageResource(R.drawable.knights1);
         }else{
             textViewSkin4.setText(R.string.N100);
-            imageButtonSkin4.setImageResource(R.drawable.testenemy5);
+            imageButtonSkin4.setImageResource(R.drawable.knights3);
         }
         if(boughSkins[5] == 1){
             textViewSkin5.setText(R.string.bought);
