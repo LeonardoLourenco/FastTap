@@ -241,10 +241,10 @@ public class skinsActivity extends AppCompatActivity {
         }
         if(boughSkins[5] == 1){
             textViewSkin5.setText(R.string.bought);
-            imageButtonSkin5.setImageResource(R.drawable.testenemy1);
+            imageButtonSkin5.setImageResource(R.drawable.samurais1);
         }else{
             textViewSkin5.setText(R.string.N100);
-            imageButtonSkin5.setImageResource(R.drawable.testenemy5);
+            imageButtonSkin5.setImageResource(R.drawable.samurais3);
         }
 
         textViewGStarCountSkins.setText(user.getGStar()+"");
