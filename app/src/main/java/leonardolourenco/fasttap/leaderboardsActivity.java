@@ -51,12 +51,20 @@ public class leaderboardsActivity extends AppCompatActivity {
         Cursor cursorUser = tableUsers.query(tableUsers.ALL_COLUMNS,null,null,null,null,null);
         cursorUser.moveToFirst();
         user = tableUsers.getCurrentUserFromCursor(cursorUser);
+        //In case the user hasn't played this game mode we need to show that there are no values there.
+
+        highScores.setHigh1("99:999");
+        highScores.setHigh2("99:999");
+        highScores.setHigh3("99:999");
+        highScores.setHigh4("99:999");
+        highScores.setHigh5("99:999");
 
         Cursor cursorHighScore = tableHighScores.query(null,DbTableHighScores.FIELD_ID_USER + "=? AND " + DbTableHighScores.FIELD_TYPE + "=?",
                 new String[] { Long.toString(user.getId()) , Integer.toString(1) },null,null,null);
         cursorHighScore.moveToFirst();
-        highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
-
+        if(cursorHighScore.getCount()>0) {      //Verify if the user played this game mode at least 1 time.
+            highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
+        }
         textViewHigh1.setText(highScores.getHigh1()+"");
         textViewHigh2.setText(highScores.getHigh2()+"");
         textViewHigh3.setText(highScores.getHigh3()+"");
@@ -80,10 +88,18 @@ public class leaderboardsActivity extends AppCompatActivity {
         cursorUser.moveToFirst();
         user = tableUsers.getCurrentUserFromCursor(cursorUser);
 
+        highScores.setHigh1("99:999");
+        highScores.setHigh2("99:999");
+        highScores.setHigh3("99:999");
+        highScores.setHigh4("99:999");
+        highScores.setHigh5("99:999");
+
         Cursor cursorHighScore = tableHighScores.query(null,DbTableHighScores.FIELD_ID_USER + "=? AND " + DbTableHighScores.FIELD_TYPE + "=?",
                 new String[] { Long.toString(user.getId()) , Integer.toString(1) },null,null,null);
         cursorHighScore.moveToFirst();
-        highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
+        if(cursorHighScore.getCount()>0) {
+            highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
+        }
 
         textViewHigh1.setText(highScores.getHigh1()+"");
         textViewHigh2.setText(highScores.getHigh2()+"");
@@ -107,10 +123,18 @@ public class leaderboardsActivity extends AppCompatActivity {
         cursorUser.moveToFirst();
         user = tableUsers.getCurrentUserFromCursor(cursorUser);
 
+        highScores.setHigh1("0");
+        highScores.setHigh2("0");
+        highScores.setHigh3("0");
+        highScores.setHigh4("0");
+        highScores.setHigh5("0");
+
         Cursor cursorHighScore = tableHighScores.query(null,DbTableHighScores.FIELD_ID_USER + "=? AND " + DbTableHighScores.FIELD_TYPE + "=?",
                 new String[] { Long.toString(user.getId()) , Integer.toString(2) },null,null,null);
         cursorHighScore.moveToFirst();
-        highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
+        if(cursorHighScore.getCount()>0) {
+            highScores = tableHighScores.getCurrentHighScoresFromCursor(cursorHighScore);
+        }
 
         textViewHigh1.setText(highScores.getHigh1()+"");
         textViewHigh2.setText(highScores.getHigh2()+"");
